@@ -2382,3 +2382,161 @@ body {
     display: none !important;
   }
 }
+
+
+.grid-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+/* ==========================================================================
+   MASTER UNIT NAVIGATION SWITCHER BAR
+   ========================================================================== */
+.master-unit-bar {
+  background: linear-gradient(135deg, #ffffff 0%, var(--bg-alt) 100%);
+  border-bottom: 1.5px solid var(--border-color);
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+  position: sticky;
+  top: 0;
+  z-index: 95;
+  backdrop-filter: blur(8px);
+}
+
+.master-unit-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.master-unit-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  color: var(--accent-slate-dark);
+}
+
+.unit-compass-icon {
+  font-size: 1.25rem;
+}
+
+.master-unit-nav-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.unit-master-btn {
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 0.55rem 1.15rem;
+  font-size: 0.88rem;
+  font-weight: 800;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.unit-master-btn:hover {
+  border-color: var(--primary-coral);
+  color: var(--primary-coral-dark);
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 10px rgba(231, 113, 63, 0.12);
+}
+
+.unit-master-btn.active {
+  background: linear-gradient(135deg, var(--primary-coral), var(--primary-coral-dark));
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(231, 113, 63, 0.28);
+  transform: scale(1.03);
+}
+
+/* Section Specific Unit Switcher (inside individual skill tabs) */
+.section-unit-switcher {
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.15rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.unit-switcher-label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--accent-slate-dark);
+}
+
+.unit-switcher-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.section-unit-pill {
+  background: var(--bg-alt);
+  border: 1.5px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.section-unit-pill:hover {
+  border-color: var(--saudi-green);
+  color: var(--saudi-green-dark);
+  background: var(--saudi-green-subtle);
+}
+
+.section-unit-pill.active {
+  background: var(--saudi-green);
+  color: #ffffff;
+  border-color: var(--saudi-green-dark);
+  box-shadow: 0 3px 8px rgba(5, 150, 105, 0.25);
+}
+
+@media (max-width: 768px) {
+  .master-unit-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .master-unit-nav-pills {
+    justify-content: center;
+  }
+  .section-unit-switcher {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .unit-switcher-buttons {
+    justify-content: center;
+  }
+}

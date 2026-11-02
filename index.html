@@ -76,6 +76,27 @@
     </nav>
   </header>
 
+  <!-- Master Unit Navigation Switcher Bar -->
+  <aside class="master-unit-bar" aria-label="Global Unit Navigation">
+    <div class="master-unit-container">
+      <div class="master-unit-title">
+        <span class="unit-compass-icon">🧭</span>
+        <strong>Curriculum Scope & Unit Filter:</strong>
+      </div>
+      <div class="master-unit-nav-pills" id="masterUnitNavPills">
+        <button class="unit-master-btn active" data-unit="all" onclick="selectMasterUnit('all', this)">
+          🌟 All Units (Comprehensive Suite)
+        </button>
+        <button class="unit-master-btn" data-unit="1" onclick="selectMasterUnit(1, this)">
+          📘 Unit 1: Lifestyles
+        </button>
+        <button class="unit-master-btn" data-unit="2" onclick="selectMasterUnit(2, this)">
+          📗 Unit 2: Life Stories
+        </button>
+      </div>
+    </div>
+  </aside>
+
   <!-- Interactive Student Passport & Registration Bar -->
   <section class="student-passport-bar" id="studentPassportSection" aria-label="Student Registration">
     <div class="passport-wrapper">
