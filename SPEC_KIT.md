@@ -3,8 +3,8 @@
 > **Course:** Super Goal 3 (Intermediate Third Grade – Term 1)  
 > **Authority:** Saudi Ministry of Education Curriculum Standards (McGraw-Hill)  
 > **Supervising Instructor:** Teacher Mahmoud Al-Saeed  
-> **Version:** 1.0 (Phase 1 Completed: Unit 1 Fully Implemented)  
-> **Last Updated:** November 2026 (Phase 1: Unit 1 Completed)
+> **Version:** 2.0 (Phase 1 & Phase 2 Completed: Units 1 & 2 Fully Implemented)  
+> **Last Updated:** November 2026 (Phase 2: Unit 2 Completed)
 
 ---
 
@@ -25,8 +25,8 @@ When extending or maintaining this project in any session, adhere strictly to th
 2. **Pacing Rule:**  
    Development proceeds unit-by-unit or in requested phases.  
    - **Phase 1 (Completed):** Unit 1 (*Lifestyles*)  
-   - **Phase 2 (Next Step / الخطوة القادمة):** Unit 2 (*Life Stories*)  
-   - **Phase 3:** Unit 3 (*When Are You Traveling?*)  
+   - **Phase 2 (Completed):** Unit 2 (*Life Stories*)  
+   - **Phase 3 (Next Step / الخطوة القادمة):** Unit 3 (*When Are You Traveling?*)  
    - **Phase 4:** Unit 4 (*What Do I Need to Buy?*)  
    *Do not jump ahead to future units until requested by the user.*
 3. **Visual Identity & Color Palette:**  
@@ -42,9 +42,9 @@ When extending or maintaining this project in any session, adhere strictly to th
    - Persistent `localStorage` tracking for student identity and gamified XP points.
    - Direct button `📜 Claim Certificate` allowing students to preview, generate, and print their official Certificate of Distinction.
 5. **Authentic Saudi Cultural Context in Every Section:**  
-   - Real photos from Saudi Arabia: Holy Kaaba, Grand Mosque Expansion, Al-Ula Hegra UNESCO monument, Vision 2030 future skyline, Islamic calligraphy, Quality of Life athletic clubs, and healthy Saudi culinary heritage.
+   - Real photos from Saudi Arabia: Holy Kaaba, Grand Mosque Expansion, Al-Ula Hegra UNESCO monument, Vision 2030 future skyline, Islamic calligraphy, Quality of Life athletic clubs, King Salman humanitarian relief (KSrelief), and HRH Prince Sultan bin Salman historic spaceflight.
    - High-resolution modal zoom when clicking any photo.
-   - Visual clue badges on quiz and examination questions (`🏋️ Fitness`, `🥗 Nutrition`, `💻 Digital Habits`, `⚽ Sports`, `🇸🇦 Saudi Lifestyle & Vision 2030`).
+   - Visual clue badges on quiz and examination questions (`🏋️ Fitness`, `🩸 Blood Donation`, `👑 Royal Heritage`, `🏖️ Environment`, `🚀 Space Heritage`, `⚽ Sports`, `🇸🇦 Saudi Lifestyle & Vision 2030`).
    - Pedagogical explanations for every question explaining why the correct choice is right and analyzing distractors.
 6. **Teacher Signature & Endorsement:**  
    Official certificates of achievement must feature:
@@ -55,21 +55,21 @@ When extending or maintaining this project in any session, adhere strictly to th
 
 ---
 
-## 3. Current Project State (Phase 1: Unit 1 Completed)
+## 3. Current Project State (Phases 1 & 2 Completed)
 
 ### Key Metrics Summary
 | Metric | Current Count | Status |
 | :--- | :---: | :---: |
-| **Units Implemented** | Unit 1 (*Lifestyles*) | ✅ 100% Complete |
-| **Total Vocabulary Items** | 45 words & expressions | ✅ With IPA, definitions, examples, audio & Saudi context |
-| **Grammar Modules** | 2 deep modules | ✅ With formulas, comparison matrices & 10 diagnostics |
-| **Pronunciation Labs** | 1 unit lab + Listening Studio | ✅ Connected speech reduction /dʒə/ + Musa Football listening |
-| **Reading Stories** | 1 master passage | ✅ "Do College Students Have a Healthy Lifestyle?" (5 Qs + 5 gallery photos) |
-| **Saudi Cultural Showcase** | 6 high-resolution cards | ✅ Kaaba, Mosque expansion, Al-Ula, Vision 2030, Quality of Life, Calligraphy |
-| **High-Resolution Images** | 30+ images in `assets/images` | ✅ Extracted from SG3 book and cultural archives |
-| **Writing Master Tasks** | 1 analytical report task | ✅ Youth habits in Saudi Arabia + real-time word count & keyword evaluator |
-| **Discussion Scenarios** | 3 real-life simulations | ✅ Gym workouts, smartphone screen time, nutrition & sleep |
-| **Tiered Examinations** | 5 exams (20 Qs each) | ✅ 100 questions with visual clues & comprehensive explanations |
+| **Units Implemented** | Units 1 & 2 (*Lifestyles* & *Life Stories*) | ✅ 100% Complete |
+| **Total Vocabulary Items** | 90 words & expressions (45 U1 + 45 U2) | ✅ With IPA, definitions, examples, audio & Saudi context |
+| **Grammar Modules** | 4 deep modules (Modules 1, 2, 3, 4) | ✅ With formulas, comparison matrices & 20 diagnostics |
+| **Pronunciation Labs** | 2 unit labs + 2 Listening Studios | ✅ /dʒə/ + /ˈjuːs.tə/ + Musa Football + Prince Sultan spaceflight |
+| **Reading Stories** | 2 master passages | ✅ College Students Healthy Lifestyle + King Salman bin Abdulaziz (10 Qs + 8 gallery photos) |
+| **Saudi Cultural Showcase** | 9 high-resolution cards | ✅ Kaaba, Grand Mosque, Al-Ula, Vision 2030, Quality of Life, Calligraphy, KSrelief, Diriyah, Space Pioneer |
+| **High-Resolution Images** | 40+ authentic textbook images in `assets/images` | ✅ Extracted from SG3 book and cultural archives |
+| **Writing Master Tasks** | 2 comprehensive studio tasks | ✅ Youth habits report + Chronological biography with live word counter & keyword evaluators |
+| **Discussion Scenarios** | 6 communicative role-plays | ✅ Gym workouts, smartphone time, nutrition, childhood used to, community blood drive, Falcons big break |
+| **Tiered Examinations** | 10 exams (20 Qs each = 200 questions) | ✅ 200 questions with visual clues & comprehensive explanations |
 | **Arabic Characters in Web Code** | **0** | ✅ Verified 100% Target Language Immersion |
 
 ---
@@ -82,7 +82,7 @@ c:\Users\elsae\Desktop\grade 3 super goal\
 ├── index.html                      # Semantic HTML5 layout, Passport bar, 8 tab panes, image modal, certificate modal
 ├── styles.css                      # Light terracotta & emerald design system, responsive styles, print media
 ├── app.js                          # Interactive engine (Passport state, Web Audio synthesizer, speech, filters, timer, cert)
-├── data.js                         # Centralized JSON database (window.APP_DATA) with Saudi cultural showcase
+├── data.js                         # Centralized JSON database (window.APP_DATA) with Saudi cultural showcase (Units 1 & 2)
 ├── .gitignore                      # Excludes large PDF references and OS cache files
 │
 ├── assets/
@@ -109,46 +109,65 @@ c:\Users\elsae\Desktop\grade 3 super goal\
 │       ├── u1_brain_superfoods.jpeg        # Unit 1 Reading: Brain-boosting superfoods
 │       ├── u1_active_running_exercise.jpeg # Unit 1 Reading: Cardiovascular exercise routines
 │       ├── u1_teenagers_computers_writing.jpeg # Unit 1 Writing: Teenagers and computer technology
-│       └── u1_lifestyle_survey_chart.jpeg  # Unit 1 FMF: Lifestyle survey chart
+│       ├── u1_lifestyle_survey_chart.jpeg  # Unit 1 FMF: Lifestyle survey chart
+│       ├── u2_king_salman_portrait.jpeg    # Unit 2 Reading: Custodian of the Two Holy Mosques King Salman
+│       ├── u2_blood_donor_trent.jpeg       # Unit 2 Opening: Trent Olsen 100th blood donation
+│       ├── u2_athlete_ahmed_jamal.jpeg     # Unit 2 Opening: Ahmed Jamal Athlete of the Year
+│       ├── u2_sunset_beach_cleanup.jpeg    # Unit 2 Opening: Sunset Beach environmental cleanup
+│       ├── u2_newborn_twins.jpeg           # Unit 2 Opening: Newborn twin sisters Linda and Jenny
+│       ├── u2_history_old_transport.jpeg   # Unit 2 Context: Old historical transport in Riyadh
+│       ├── u2_prince_sultan_space.jpeg     # Unit 2 Listening: HRH Prince Sultan bin Salman astronaut
+│       ├── u2_falcons_basketball_team.jpeg # Unit 2 Conversation: Khalid & The Falcons basketball squad
+│       ├── u2_riyadh_metropolis_growth.jpeg # Unit 2 Reading: Riyadh transformation into world metropolis
+│       ├── u2_humanitarian_relief.jpeg     # Unit 2 Reading: King Salman Humanitarian Aid (KSrelief)
+│       ├── u2_king_salman_awards.jpeg      # Unit 2 Reading: King Salman academic doctorates & medals
+│       └── u2_historical_timeline.jpeg     # Unit 2 Writing: Prince Sultan bin Salman biographical timeline
 ```
 
 ---
 
-## 5. Phase 1 Implementation Summary (Unit 1: *Lifestyles*)
+## 5. Phase 2 Implementation Summary (Unit 2: *Life Stories*)
 
-### Student's Book Pages 2–11
-- **Vocabulary:** 45 official vocabulary items covering lifestyle archetypes (`addict`, `fanatic`, `freak`, `devoted`), sports & fitness (`work out`, `gym`, `rock climbing`), leisure & mind games (`sudoku`, `puzzle`), diet & wellness (`vegetarian`, `herbal tea`, `produce`, `grains`), frequency adverbs (`always`, `usually`, `frequently`, `sometimes`, `seldom`, `rarely`, `never`), conversational idioms (`turn off`, `Anyway`, `You see`, `overdo`), and quantifiers (`both`, `neither`, `all`, `none`).
+### Student's Book Pages 12–21
+- **Vocabulary (45 items):**
+  - **Nouns (18):** `appointment`, `attitude`, `blood`, `colleague`, `community`, `donation`, `effort`, `employee`, `facility`, `infant`, `leadership`, `league`, `litter`, `newborn`, `operation`, `owner`, `principal`, `twin`.
+  - **Verbs (8):** `award`, `compete`, `donate`, `encourage`, `gather`, `join`, `practice`, `receive`.
+  - **Phrases with verbs (5):** `comb the beach`, `get in touch with`, `grow up`, `take responsibility`, `used to`.
+  - **Adjectives (5):** `environmental`, `crippling`, `hopeful`, `original`, `outstanding`.
+  - **Expressions (2):** `congratulations`, `wish (someone) all the best`.
+  - **Real Talk (4):** `big break`, `to be into something`, `to turn up`, `What about ...?`.
+  - **Academic Key Terms (3):** `biography`, `charity`, `milestone`.
 - **Grammar Modules:**
-  - **Module 1:** Simple Present Tense for Habitual Activities & Frequency Adverbs/Expressions (word order with main verbs vs. 'be', percentage scale, 4 common error autopsies, 5 diagnostics).
-  - **Module 2:** Inquiries of Frequency & Quantifiers (`How often`, `How much`, `How long` + `All`, `Both`, `Neither`, `None` with singular/plural agreement).
-- **Pronunciation Lab 1:** Connected Speech Reduction of `do you` (/dʒə/) + Listening Comprehension Studio with professional football player Musa (interactive True/False with explanations).
-- **Reading Story 1:** *"Do College Students Have a Healthy Lifestyle?"* (Investigative study on university students' eating habits, sleep duration, and physical exercise with 5 comprehension questions and gallery).
-- **Writing Task 1:** Youth Pastimes & Lifestyle Analytical Report: Examining common habits and technology use among young people in Saudi Arabia, with pronoun cohesion evaluator and live word counter.
-- **Discussion Scenarios 1 to 3:**
-  - Scenario 1: Gym Workouts vs. Digital Pastimes (Omar & Majid).
-  - Scenario 2: Smartphone Screen Time & Digital Habits.
-  - Scenario 3: Balanced Nutrition, Sleep Schedules & Exam Preparation.
-- **Exams 1 to 5:** 100 multiple-choice questions with visual clues and detailed pedagogical explanations.
+  - **Module 3:** Simple Past Tense (Regular `-ed` inflections and irregular verbs) & Passive Expressions with `be + born` (`was/were born`, `was educated`, `was raised`).
+  - **Module 4:** Habitual Past with `used to` vs. Simple Past & Time Clauses with `when` (`didn't use to`, `Did you use to...?`, past time markers `ago`, `last`, `in`, `yesterday`).
+- **Pronunciation Lab 2:** Connected Speech Reduction of `used to` (/ˈjuːs.tə/) with voiceless assimilation and schwa reduction + Listening Comprehension Studio with HRH Prince Sultan bin Salman Al Saud (historical timeline from 1956 to present).
+- **Reading Story 2:** *"The King of Saudi Arabia"* (Biographical recount of visionary leadership, urban transformation of Riyadh, and global humanitarian relief under the Custodian of the Two Holy Mosques King Salman bin Abdulaziz with 5 comprehension questions and 4 high-resolution gallery photographs).
+- **Writing Task 2:** Chronological Biography & Life Story of an Influential Figure (with prepositions of time/place, time connectives, model text, word count evaluator, and 12-keyword analyzer).
+- **Discussion Scenarios 4 to 6:**
+  - Scenario 4: Childhood Memories & How Life Used to Be (Fahd & Rakan).
+  - Scenario 5: Community Service & The Gift of Life (Ahmed Jamal & Trent Olsen).
+  - Scenario 6: The Falcons' Big Break (Reporter & Team Captain Khalid).
+- **Exams 6 to 10:** 100 multiple-choice questions with visual clues and detailed pedagogical explanations.
 
 ---
 
-## 6. Next Step Blueprint (Phase 2: Unit 2) — الخطوة القادمة
+## 6. Next Step Blueprint (Phase 3: Unit 3) — الخطوة القادمة
 
-When the user asks to begin **Phase 2 (Unit 2)**, adhere to this curriculum specification:
+When the user asks to begin **Phase 3 (Unit 3)**, adhere to this curriculum specification:
 
-### Unit 2: *Life Stories* (Student's Book Pages 12–21)
+### Unit 3: *When Are You Traveling?* (Student's Book Pages 22–31)
 - **Functions:**
-  - Talking about past actions and significant historical milestones.
-  - Relating past events and personal biographies in chronological order.
-  - Reporting what people said and recounting personal memories.
-  - Talking about past dates and times.
-- **Grammar Modules to Add (Modules 3 & 4):**
-  - **Module 3:** Simple Past Tense (Regular `-ed` inflections and irregular verbs) + Expressions with the passive `be + born`.
-  - **Module 4:** Habitual Past with `used to` vs. Simple Past + Time Clauses with `when`.
-- **Pronunciation:** Pronunciation of `used to` (/ˈjuːs.tə/) in connected speech.
-- **Reading Story 2:** *"The King of Saudi Arabia"* (Biographical recount of visionary leadership, historical achievements, and modernization).
-- **Writing Task 2:** Writing a structured life story or biography of an influential person.
-- **Cultural Images to Extract:** King of Saudi Arabia historical archives, national founding milestones, and humanitarian leadership.
+  - Talking about travel plans, airline schedules, and airport departures.
+  - Making travel arrangements and hotel inquiries.
+  - Expressing future intentions and promises.
+  - Explaining reasons and intentions using infinitives of purpose.
+- **Grammar Modules to Add (Modules 5 & 6):**
+  - **Module 5:** Future with Present Progressive vs. `be going to` vs. `will`.
+  - **Module 6:** Infinitives of Purpose (`in order to` / `to + verb`) + Time Clauses with Future Meaning (`before`, `after`, `when`, `as soon as`).
+- **Pronunciation:** Reduced pronunciation of `going to` (/ˈɡənə/ or /ˈɡoʊɪŋ tə/) in connected conversational speech.
+- **Reading Story 3:** Travel & Cultural Exchange in Saudi Arabia (International students learning Arabic in the Kingdom / Saudi tourism destinations).
+- **Writing Task 3:** Composing a formal travel itinerary or letter to a friend describing an upcoming educational trip to a foreign destination.
+- **Cultural Images to Extract:** Saudi international airports, King Khalid International Airport (Riyadh), King Abdulaziz Airport (Jeddah), high-speed Haramain Railway, and foreign student Arabic learning academies in Saudi Arabia.
 
 ---
 
