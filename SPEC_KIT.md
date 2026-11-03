@@ -3,8 +3,8 @@
 > **Course:** Super Goal 3 (Intermediate Third Grade – Term 1)  
 > **Authority:** Saudi Ministry of Education Curriculum Standards (McGraw-Hill)  
 > **Supervising Instructor:** Teacher Mahmoud Al-Saeed  
-> **Version:** 2.0 (Phase 1 & Phase 2 Completed: Units 1 & 2 Fully Implemented)  
-> **Last Updated:** November 2026 (Phase 2: Unit 2 Completed)
+> **Version:** 4.1 (Term 1 Complete + Interactive Word Definitions & Precision Audio-Highlight Sync)  
+> **Last Updated:** November 2026 (Phase 4.1: Reading Lounge Audio-Visual Synchronization & Vocabulary Discovery Engine)
 
 ---
 
@@ -26,8 +26,9 @@ When extending or maintaining this project in any session, adhere strictly to th
    Development proceeds unit-by-unit or in requested phases.  
    - **Phase 1 (Completed):** Unit 1 (*Lifestyles*)  
    - **Phase 2 (Completed):** Unit 2 (*Life Stories*)  
-   - **Phase 3 (Next Step / الخطوة القادمة):** Unit 3 (*When Are You Traveling?*)  
-   - **Phase 4:** Unit 4 (*What Do I Need to Buy?*)  
+   - **Phase 3 (Completed):** Unit 3 (*When Are You Traveling?*)  
+   - **Phase 4 (Completed):** Unit 4 (*What Do I Need to Buy?*)  
+   - **Phase 5 (Next Step / الخطوة القادمة):** Expansion 1–4 (*Review & Term 1 Grand Consolidation*)  
    *Do not jump ahead to future units until requested by the user.*
 3. **Visual Identity & Color Palette:**  
    - Theme is **Light, Vibrant, and Engaging** (crisp backgrounds: `#f8fafc`, `#ffffff`, `#fff7f4`).
@@ -55,21 +56,21 @@ When extending or maintaining this project in any session, adhere strictly to th
 
 ---
 
-## 3. Current Project State (Phases 1 & 2 Completed)
+## 3. Current Project State (Term 1 Complete: Units 1–4 Fully Built)
 
 ### Key Metrics Summary
 | Metric | Current Count | Status |
 | :--- | :---: | :---: |
-| **Units Implemented** | Units 1 & 2 (*Lifestyles* & *Life Stories*) | ✅ 100% Complete |
-| **Total Vocabulary Items** | 90 words & expressions (45 U1 + 45 U2) | ✅ With IPA, definitions, examples, audio & Saudi context |
-| **Grammar Modules** | 4 deep modules (Modules 1, 2, 3, 4) | ✅ With formulas, comparison matrices & 20 diagnostics |
-| **Pronunciation Labs** | 2 unit labs + 2 Listening Studios | ✅ /dʒə/ + /ˈjuːs.tə/ + Musa Football + Prince Sultan spaceflight |
-| **Reading Stories** | 2 master passages | ✅ College Students Healthy Lifestyle + King Salman bin Abdulaziz (10 Qs + 8 gallery photos) |
+| **Units Implemented** | Units 1, 2, 3 & 4 (*Lifestyles*, *Life Stories*, *When Are You Traveling?* & *What Do I Need to Buy?*) | ✅ 100% Term 1 Complete |
+| **Total Vocabulary Items** | 180 words & expressions (45 per unit × 4 units) | ✅ With IPA, definitions, examples, audio & Saudi context |
+| **Grammar Modules** | 8 deep modules (Modules 1 to 8) | ✅ With formulas, comparison matrices & 40 diagnostics |
+| **Pronunciation Labs** | 4 unit labs + 4 Listening Studios | ✅ /dʒə/ + /ˈjuːs.tə/ + /ˈɡənə/ + Listing Pitch + 4 Audio Studios |
+| **Reading Stories** | 4 master passages | ✅ College Students + King Salman + Arabic in KSA + Culinary Traditions (20 Qs + 16 gallery photos) |
 | **Saudi Cultural Showcase** | 9 high-resolution cards | ✅ Kaaba, Grand Mosque, Al-Ula, Vision 2030, Quality of Life, Calligraphy, KSrelief, Diriyah, Space Pioneer |
 | **High-Resolution Images** | 40+ authentic textbook images in `assets/images` | ✅ Extracted from SG3 book and cultural archives |
-| **Writing Master Tasks** | 2 comprehensive studio tasks | ✅ Youth habits report + Chronological biography with live word counter & keyword evaluators |
-| **Discussion Scenarios** | 6 communicative role-plays | ✅ Gym workouts, smartphone time, nutrition, childhood used to, community blood drive, Falcons big break |
-| **Tiered Examinations** | 10 exams (20 Qs each = 200 questions) | ✅ 200 questions with visual clues & comprehensive explanations |
+| **Writing Master Tasks** | 4 comprehensive studio tasks | ✅ Youth habits + Biography + Travel Itinerary + Culinary Recipe with live word counters & keyword evaluators |
+| **Discussion Scenarios** | 12 communicative role-plays | ✅ Gym, smartphone, diet, used to, blood drive, Falcons, airport, study tour, concierge, grocery store, Kabsa home cooking, healthy dining |
+| **Tiered Examinations** | 20 exams (20 Qs each = 400 questions) | ✅ 400 questions with visual clues & comprehensive explanations |
 | **Arabic Characters in Web Code** | **0** | ✅ Verified 100% Target Language Immersion |
 
 ---
@@ -151,27 +152,71 @@ c:\Users\elsae\Desktop\grade 3 super goal\
 
 ---
 
-## 6. Next Step Blueprint (Phase 3: Unit 3) — الخطوة القادمة
+## 6. Phase 3 Implementation Summary (Unit 3: *When Are You Traveling?*)
 
-When the user asks to begin **Phase 3 (Unit 3)**, adhere to this curriculum specification:
-
-### Unit 3: *When Are You Traveling?* (Student's Book Pages 22–31)
-- **Functions:**
-  - Talking about travel plans, airline schedules, and airport departures.
-  - Making travel arrangements and hotel inquiries.
-  - Expressing future intentions and promises.
-  - Explaining reasons and intentions using infinitives of purpose.
-- **Grammar Modules to Add (Modules 5 & 6):**
-  - **Module 5:** Future with Present Progressive vs. `be going to` vs. `will`.
-  - **Module 6:** Infinitives of Purpose (`in order to` / `to + verb`) + Time Clauses with Future Meaning (`before`, `after`, `when`, `as soon as`).
-- **Pronunciation:** Reduced pronunciation of `going to` (/ˈɡənə/ or /ˈɡoʊɪŋ tə/) in connected conversational speech.
-- **Reading Story 3:** Travel & Cultural Exchange in Saudi Arabia (International students learning Arabic in the Kingdom / Saudi tourism destinations).
-- **Writing Task 3:** Composing a formal travel itinerary or letter to a friend describing an upcoming educational trip to a foreign destination.
-- **Cultural Images to Extract:** Saudi international airports, King Khalid International Airport (Riyadh), King Abdulaziz Airport (Jeddah), high-speed Haramain Railway, and foreign student Arabic learning academies in Saudi Arabia.
+### Student's Book Pages 22–31
+- **Vocabulary (45 items):**
+  - **Airport & Flight Operations (10):** `aisle`, `baggage`, `boarding pass`, `carry-on`, `customs`, `departure`, `flight attendant`, `gate`, `layover`, `luggage`, `runway`, `terminal`.
+  - **Travel Arrangements & Documents (8):** `destination`, `itinerary`, `passenger`, `passport`, `reservation`, `schedule`, `ticket`, `visa`.
+  - **Travel Actions & Verbs (10):** `board`, `confirm`, `depart`, `embark`, `fasten`, `land`, `pack`, `postpone`, `reserve`, `take off`.
+  - **Descriptive Travel Adjectives (7):** `delayed`, `direct`, `domestic`, `international`, `punctual`, `spacious`, `valid`.
+  - **Phrasal Verbs & Real Talk (6):** `check in`, `drop off`, `look forward to`, `see off`, `in a rush`, `ahead of time`.
+  - **Academic & Cultural Terms (2):** `hospitality`, `scholarship`.
+- **Grammar Modules:**
+  - **Module 5:** Future Expressions — Present Progressive (fixed arrangements) vs. `be going to` (intentions & predictions with observable evidence) vs. `will` (spontaneous on-the-spot decisions, formal predictions, promises, and offers) with 10 diagnostic questions and error analyses.
+  - **Module 6:** Infinitives of Purpose (`to + base verb` / `in order to + base verb`) + Future Time Clauses (`when`, `before`, `after`, `as soon as`, `until` with Simple Present) + Prepositions of Movement (`into`, `out of`, `through`, `towards`, `onto`, `off`, `down`) with 10 diagnostic questions.
+- **Pronunciation Lab 3:** Connected Speech Reduction of `going to` (/ˈɡənə/ & /ˈɡoʊɪŋ tə/) before base verbs vs. strict prohibition before physical noun destinations + Airport Concourse & Flight Departure Audio Studio at King Khalid International Airport (Terminal 5 flight announcements for Saudia SV 1024 to Jeddah).
+- **Reading Story 3:** *"Studying Arabic in Saudi Arabia"* (Inspiring narrative of international exchange students studying Modern Standard Arabic at premier Kingdom universities, traveling on the high-speed Haramain Railway, exploring Al-Ula UNESCO heritage, and experiencing authentic Saudi hospitality with 5 comprehension questions and 4 gallery photos).
+- **Writing Task 3:** Travel Itinerary & Personal Letter: An Educational Journey in Saudi Arabia (150–200 words covering flight times, airport procedures, hotel bookings, and cultural excursions with model text, live word counter, and 18 travel-specific keyword evaluators).
+- **Discussion Scenarios 7 to 9:**
+  - Scenario 7: Airport Check-In & Boarding Gate Inquiries (Tariq & Saudia Ground Agent Mr. Hani).
+  - Scenario 8: Planning an Educational Tour across the Kingdom (Nawaf & International Student Lucas).
+  - Scenario 9: Hotel Concierge & Travel Inquiries (Dr. Robert & Concierge Mr. Zaid).
+- **Exams 11 to 15:** 100 multiple-choice questions with visual clues and detailed pedagogical explanations.
 
 ---
 
-## 7. Audio & Speech Architecture (Deepgram American Voice, 75% Speed & Zero-Lag Sync)
+## 7. Phase 4 Implementation Summary (Unit 4: *What Do I Need to Buy?*)
+
+### Student's Book Pages 32–41
+- **Vocabulary (45 items):**
+  - **Produce, Meats & Pantry Staples (13):** `appetite`, `cabbage`, `carrot`, `clove`, `cuisine`, `flour`, `garlic`, `ingredient`, `lamb`, `onion`, `pepper`, `rice`, `salt`, `spice`, `tomato`.
+  - **Containers & Measurement Partitives (8):** `carton`, `loaf`, `package`, `pinch`, `slice`, `tablespoon`, `teaspoon`.
+  - **Cooking Actions & Verbs (11):** `bake`, `boil`, `chop`, `fry`, `grate`, `marinate`, `mix`, `pour`, `roast`, `season`, `stir`.
+  - **Descriptive Food Adjectives (6):** `delicious`, `fresh`, `nutritious`, `ripe`, `savory`, `spicy`.
+  - **Shopping Real Talk (2):** `out of stock`, `on sale`.
+  - **Cultural & Nutritional Terms (2):** `staple`, `hospitality`.
+- **Grammar Modules:**
+  - **Module 7:** Count vs. Non-Count Nouns, Quantifiers (`some/any`, `much/many`, `a few/a little`, `a lot of`) & Measurement Partitives (`a bottle of`, `a bag of`, `a carton of`, `a can of`, `a loaf of`, `a slice of`, `a clove of`, `a tablespoon of`) with 10 diagnostic questions and error autopsies.
+  - **Module 8:** Reflexive Pronouns (`myself`, `yourself`, `himself`, `herself`, `itself`, `ourselves`, `yourselves`, `themselves`) + Connectors of Cause & Result (`because` vs. `so`) with 10 diagnostic questions.
+- **Pronunciation Lab 4:** Listing Intonation (rising pitch on non-final series items, terminal falling pitch on the final item) + Master Chef Recipe Listening Studio (Chicken Kabsa preparation steps, sautéing, simmering, and garnishing).
+- **Reading Story 4:** *"Culinary Traditions & National Cuisine of Saudi Arabia"* (Comprehensive narrative of authentic culinary heritage, Kabsa, Jareesh, regional seafood, Qassim dates, and generous hospitality Karam with 5 comprehension questions and 4 gallery photos).
+- **Writing Task 4:** Culinary Recipe & Step-by-Step Cooking Guide: Authentic Saudi Kabsa (150–200 words covering ingredient listing with partitives, sequential transition words, cause/result connectors, live word counter, and 19 culinary keyword evaluators).
+- **Discussion Scenarios 10 to 12:**
+  - Scenario 10: Supermarket Grocery Shopping & Checklist (Fahd & Rayan).
+  - Scenario 11: Preparing Traditional Saudi Kabsa at Home (Omar & Tariq).
+  - Scenario 12: Restaurant Dining & Nutritional Awareness (Nawaf, Faisal & Waiter Anas).
+- **Exams 16 to 20:** 100 multiple-choice questions with visual clues and detailed pedagogical explanations.
+
+---
+
+## 8. Next Step Blueprint (Phase 5: Expansion 1–4) — الخطوة القادمة
+
+When the user asks to begin **Phase 5 (Expansion 1–4)**, adhere to this curriculum specification:
+
+### Expansion Units 1–4: *Consolidation & Term 1 Review* (Student's Book Pages 42–49)
+- **Functions:**
+  - Consolidating language from Units 1 through 4 (Lifestyles, Life Stories, Travel, Food).
+  - Reading authentic cultural biographies and global traditions.
+  - Chant along, lexical games, and cross-thematic communicative syntheses.
+- **Grammar Modules to Add (Review Modules 9 & 10):**
+  - **Module 9:** Term 1 Syntactic Review: Present vs. Past vs. Future vs. Quantifiers.
+  - **Module 10:** Comprehensive Connectors & Pronoun Matrix: Reflexives, Time Clauses, Infinitives of Purpose, Cause & Result.
+- **Grand Term 1 Final Examinations (Exams 21–25):** 100 comprehensive questions simulating official Ministry term examinations.
+
+---
+
+## 9. Audio & Speech Architecture (Deepgram American Voice, 75% Speed & Zero-Lag Sync)
 
 - Dedicated Deepgram Voice Studio modal (`#deepgramConfigModal`) in the header.
 - Supports premier natural American English models (`aura-asteria-en`, `aura-luna-en`, `aura-orion-en`, `aura-zeus-en`).
@@ -179,6 +224,21 @@ When the user asks to begin **Phase 3 (Unit 3)**, adhere to this curriculum spec
   - Prominent speed toggle button in player controls: `🐢 Speed: 75% (Slow)` vs `⚡ Speed: 100% (Normal)`.
   - Persisted in `localStorage ('preferred_speech_rate')`.
   - Applies across all spoken audio: reading stories, vocabulary entries, listening studio, and discussion scenarios.
-- **Zero-Lag Synchronized Highlighting Engine:**
+- **Precision Dual-Engine Synchronized Highlighting Engine:**
   - Sentence-chained playback architecture with sub-25ms start time.
-  - Students can click directly on any individual sentence in the passage to hear and follow along.
+  - Active utterance GC protection: prevents Chromium/WebKit from garbage-collecting speech instances mid-passage.
+  - Acoustic duration weighting (phoneme lengths + punctuation pause offsets for commas and periods).
+  - Continuous cadence time-stepper (`requestAnimationFrame`) paired with native `onboundary` event reconciliation.
+  - Automatic sentence sequencing with watchdog safety timer.
+  - Students can click directly on any individual sentence in the passage to hear and follow along with synchronized gold-amber karaoke highlights.
+- **Interactive Click-to-Define Vocabulary Discovery Engine:**
+  - 588 curated reading glossary terms in `DATA.readingGlossary`.
+  - 100% coverage of all 546 unique words in the 4 textbook reading passages.
+  - Bidirectional morphological stemmer (de-inflects `-s`, `-es`, `-ies`, `-ed`, `-ing`, `-ly`, `-er`, `-est` and reverse inflects singular/base forms).
+  - Floating Definition Modal (`#wordMeaningModal`):
+    - Word in large Outfit font + IPA phonetic transcription.
+    - Part of speech badge + Super Goal 3 Core Curriculum badge if applicable.
+    - Pedagogical definition + contextual example sentence.
+    - Saudi Cultural Heritage & Vision 2030 notes.
+    - Action buttons: `🔊 Listen to Word` and `▶ Play Full Sentence`.
+    - Instant keyboard (Escape) and backdrop dismissibility.

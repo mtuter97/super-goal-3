@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
     speechRate: parseFloat(localStorage.getItem('preferred_speech_rate')) || 1.0,
     readingSentenceIndex: 0,
     readingAnimationTimer: null,
+    sentenceStepTimer: null,
+    sentenceSafetyTimer: null,
+    currentUtterance: null,
     audioCache: {},
     currentAudioObject: null,
     isReadingPlaying: false,
@@ -45,9 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
     examStreak: 0,
     examBestStreak: 0,
     examEncouragements: {},
-    currentReadingStoryId: 'r1',
-    currentWritingTaskId: 'w1',
-    currentDiscussionId: 'd1',
+    currentReadingStoryId: 'u1_reading_lifestyles',
+    currentWritingTaskId: 'u1_w1',
+    currentDiscussionId: 'u1_d1',
     theme: localStorage.getItem('sg2_theme') || 'light'
   };
 
@@ -181,6 +184,14 @@ document.addEventListener('DOMContentLoaded', () => {
       cancelAnimationFrame(state.readingAnimationTimer);
       state.readingAnimationTimer = null;
     }
+    if (state.sentenceStepTimer) {
+      cancelAnimationFrame(state.sentenceStepTimer);
+      state.sentenceStepTimer = null;
+    }
+    if (state.sentenceSafetyTimer) {
+      clearTimeout(state.sentenceSafetyTimer);
+      state.sentenceSafetyTimer = null;
+    }
     state.isReadingPlaying = false;
     setEqualizerAnimating(false);
     clearAllReadingHighlights();
@@ -301,14 +312,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const directCertBtn = document.getElementById('directCertBtn');
   if (directCertBtn) {
     directCertBtn.addEventListener('click', () => {
-      showCertificateModal(state.studentName, 'Units 1 & 2: Lifestyles & Life Stories Academic Distinction Certification', 98, 'A+ (Distinction)', 'MASTER');
+      showCertificateModal(state.studentName, 'Units 1–4: Complete Term 1 Curriculum Academic Distinction Certification', 98, 'A+ (Distinction)', 'MASTER');
     });
   }
 
   const headerCertBtn = document.getElementById('headerCertBtn');
   if (headerCertBtn) {
     headerCertBtn.addEventListener('click', () => {
-      showCertificateModal(state.studentName, 'Units 1 & 2: Lifestyles & Life Stories Academic Distinction Certification', 98, 'A+ (Distinction)', 'MASTER');
+      showCertificateModal(state.studentName, 'Units 1–4: Complete Term 1 Curriculum Academic Distinction Certification', 98, 'A+ (Distinction)', 'MASTER');
     });
   }
 
@@ -435,13 +446,21 @@ document.addEventListener('DOMContentLoaded', () => {
       state.discussionFilter = num;
       state.examFilter = 'u' + num;
       if (num === 1) {
-        state.currentReadingStoryId = 'r1';
-        state.currentWritingTaskId = 'w1';
-        state.currentDiscussionId = 'd1';
+        state.currentReadingStoryId = 'u1_reading_lifestyles';
+        state.currentWritingTaskId = 'u1_w1';
+        state.currentDiscussionId = 'u1_d1';
       } else if (num === 2) {
-        state.currentReadingStoryId = 'r2';
-        state.currentWritingTaskId = 'w2';
-        state.currentDiscussionId = 'd4';
+        state.currentReadingStoryId = 'u2_reading_king_salman';
+        state.currentWritingTaskId = 'u2_w2';
+        state.currentDiscussionId = 'u2_d1';
+      } else if (num === 3) {
+        state.currentReadingStoryId = 'u3_reading_studying_arabic';
+        state.currentWritingTaskId = 'u3_w3';
+        state.currentDiscussionId = 'u3_d1';
+      } else if (num === 4) {
+        state.currentReadingStoryId = 'u4_reading_culinary_traditions';
+        state.currentWritingTaskId = 'u4_w4';
+        state.currentDiscussionId = 'u4_d1';
       }
     }
 
@@ -510,6 +529,12 @@ document.addEventListener('DOMContentLoaded', () => {
           </button>
           <button class="section-unit-pill ${curUnit === 2 || curUnit === '2' ? 'active' : ''}" onclick="selectMasterUnit(2)">
             📗 Unit 2: Life Stories
+          </button>
+          <button class="section-unit-pill ${curUnit === 3 || curUnit === '3' ? 'active' : ''}" onclick="selectMasterUnit(3)">
+            ✈️ Unit 3: When Are You Traveling?
+          </button>
+          <button class="section-unit-pill ${curUnit === 4 || curUnit === '4' ? 'active' : ''}" onclick="selectMasterUnit(4)">
+            🛒 Unit 4: What Do I Need to Buy?
           </button>
         </div>
       </div>
@@ -615,7 +640,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="hero-card">
         <div class="hero-text">
           <span class="hero-tag">🇸🇦 Saudi Ministry of Education Curriculum</span>
-          <h2>Super Goal 3 (Units 1 & 2: Lifestyles & Life Stories) Master Platform</h2>
+          <h2>Super Goal 3 (Units 1–4: Complete Term 1 Curriculum Suite) Master Platform</h2>
           <p>${c.overview}</p>
           <div class="hero-stats-row">
             <div class="hero-stat-box">
@@ -683,6 +708,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (filter === 'all') return true;
       if (filter === 'u1') return v.unit === 1;
       if (filter === 'u2') return v.unit === 2;
+      if (filter === 'u3') return v.unit === 3;
+      if (filter === 'u4') return v.unit === 4;
+      if (filter === 'culinary') return v.category && (v.category.includes('Culinary') || v.category.includes('Produce') || v.category.includes('Cooking') || v.category.includes('Food') || v.category.includes('Ingredients') || v.category.includes('Baking') || v.category.includes('Meats'));
+      if (filter === 'travel') return v.category && (v.category.includes('Travel') || v.category.includes('Airport') || v.category.includes('Flight'));
       if (filter === 'nouns') return v.pos === 'noun';
       if (filter === 'verbs') return v.pos === 'verb';
       if (filter === 'phrases') return v.pos === 'phrase' || v.pos === 'idiom' || (v.category && (v.category.includes('Phrases') || v.category.includes('Habits')));
@@ -874,6 +903,12 @@ document.addEventListener('DOMContentLoaded', () => {
           <button class="section-unit-pill ${filter === 2 || filter === '2' ? 'active' : ''}" onclick="filterGrammarUnit(2)">
             📗 Unit 2: Past & 'Used to' (Modules 3 & 4)
           </button>
+          <button class="section-unit-pill ${filter === 3 || filter === '3' ? 'active' : ''}" onclick="filterGrammarUnit(3)">
+            ✈️ Unit 3: Future & Infinitives (Modules 5 & 6)
+          </button>
+          <button class="section-unit-pill ${filter === 4 || filter === '4' ? 'active' : ''}" onclick="filterGrammarUnit(4)">
+            🛒 Unit 4: Quantifiers & Reflexives (Modules 7 & 8)
+          </button>
         </div>
       </div>
     `;
@@ -1020,17 +1055,23 @@ document.addEventListener('DOMContentLoaded', () => {
           <button class="section-unit-pill ${filter === 2 || filter === '2' ? 'active' : ''}" onclick="filterPronunciationUnit(2)">
             📗 Unit 2: Connected Speech Reduction (/ˈjuːs.tə/)
           </button>
+          <button class="section-unit-pill ${filter === 3 || filter === '3' ? 'active' : ''}" onclick="filterPronunciationUnit(3)">
+            ✈️ Unit 3: Connected Reduction of 'Going To' (/ˈɡənə/)
+          </button>
+          <button class="section-unit-pill ${filter === 4 || filter === '4' ? 'active' : ''}" onclick="filterPronunciationUnit(4)">
+            🛒 Unit 4: Listing Pitch Contours
+          </button>
         </div>
       </div>
     `;
 
-    const gridClass = labsToRender.length === 1 ? 'grid-1' : 'grid-2';
+    const gridClass = labsToRender.length === 1 ? 'grid-1' : (labsToRender.length === 2 ? 'grid-2' : 'grid-3');
 
     container.innerHTML = `
       <div class="section-header">
         <div>
           <h2>Phonology & Speech Acoustics Studio</h2>
-          <p>Targeted pronunciation rules, connected speech reductions, intonation contours, and minimal pair vowel contrasts for Super Goal 3 (Units 1 & 2: Lifestyles & Life Stories).</p>
+          <p>Targeted pronunciation rules, connected speech reductions, intonation contours, and minimal pair vowel contrasts for Super Goal 3 (Units 1–4: Complete Term 1 Curriculum Suite).</p>
         </div>
       </div>
 
@@ -1099,13 +1140,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let totalWeight = 0;
     const items = allWordSpans.map(wElem => {
       const text = wElem.innerText.trim();
-      let weight = Math.max(2, text.length);
+      let weight = Math.max(2, text.length) * 1.0;
       if (/[.!?]$/.test(text)) {
-        weight += 12; // pause for sentence end
+        weight += 10.0; // pause for sentence end
       } else if (/[,;:]$/.test(text)) {
-        weight += 5; // pause for comma / clause
+        weight += 4.5; // pause for comma / clause
       } else {
-        weight += 1;
+        weight += 1.2;
       }
       totalWeight += weight;
       return { elem: wElem, weight, text };
@@ -1156,7 +1197,7 @@ document.addEventListener('DOMContentLoaded', () => {
     state.readingAnimationTimer = requestAnimationFrame(syncFrame);
   }
 
-  // High-performance Sentence-Chained American Speech (Zero Delay & Instant Start)
+  // High-performance Dual-Engine Synchronized American Speech (Zero Delay & Real-time Cadence Tracking)
   function playSentenceChainedSpeech(startFromSentenceIndex = 0) {
     const sentenceSpans = Array.from(document.querySelectorAll('#highlightableCanvas .sentence-span'));
     if (!sentenceSpans.length) return;
@@ -1171,35 +1212,68 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      // Clear any running timers from previous sentence
+      if (state.sentenceStepTimer) {
+        cancelAnimationFrame(state.sentenceStepTimer);
+        state.sentenceStepTimer = null;
+      }
+      if (state.sentenceSafetyTimer) {
+        clearTimeout(state.sentenceSafetyTimer);
+        state.sentenceSafetyTimer = null;
+      }
+
       state.readingSentenceIndex = index;
       const sentSpan = sentenceSpans[index];
       const sText = sentSpan.innerText.trim();
 
-      // Activate sentence visually
+      // Activate sentence visually and scroll smoothly into view
       sentenceSpans.forEach(s => s.classList.remove('sentence-active'));
       sentSpan.classList.add('sentence-active');
       sentSpan.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-      // Clear words and activate first word
+      // Clear words and activate initial word
       clearWordHighlights();
       const wordSpans = Array.from(sentSpan.querySelectorAll('.word-span'));
       if (wordSpans.length > 0) {
         wordSpans[0].classList.add('word-highlighted');
       }
 
-      // Map words to character offsets within this sentence
+      // Map words to character offsets & duration milestones
       const wordMap = [];
       let currentOffset = 0;
-      for (const wElem of wordSpans) {
+      let totalEstMs = 0;
+      const rateMultiplier = 1 / (state.speechRate || 1.0); // 0.75x = 1.33x duration, 1.0x = 1.0x duration
+
+      for (let i = 0; i < wordSpans.length; i++) {
+        const wElem = wordSpans[i];
         const raw = wElem.innerText.trim();
         const start = sText.indexOf(raw, currentOffset);
-        if (start !== -1) {
-          const end = start + raw.length;
-          wordMap.push({ elem: wElem, start, end, raw });
-          currentOffset = end;
-        } else {
-          wordMap.push({ elem: wElem, start: currentOffset, end: currentOffset + raw.length, raw });
+        const actualStart = start !== -1 ? start : currentOffset;
+        const actualEnd = actualStart + raw.length;
+        currentOffset = actualEnd;
+
+        // Acoustic weight heuristic:
+        // Base speech speed ~ 52ms per character at 1.0x rate + base 85ms per word
+        let wordDurationMs = (Math.max(2, raw.length) * 52 + 85) * rateMultiplier;
+        if (/[.!?]$/.test(raw)) {
+          wordDurationMs += 380 * rateMultiplier; // sentence closure pause
+        } else if (/[,;:]$/.test(raw)) {
+          wordDurationMs += 200 * rateMultiplier; // clause pause
         }
+
+        const startMs = totalEstMs;
+        totalEstMs += wordDurationMs;
+        const endMs = totalEstMs;
+
+        wordMap.push({
+          index: i,
+          elem: wElem,
+          start: actualStart,
+          end: actualEnd,
+          raw: raw,
+          startMs: startMs,
+          endMs: endMs
+        });
       }
 
       // Setup utterance with state.speechRate (0.75x or 1.0x)
@@ -1212,38 +1286,101 @@ document.addEventListener('DOMContentLoaded', () => {
       utterance.rate = state.speechRate; // 0.75 or 1.0
       utterance.pitch = 1.0;
 
-      utterance.onboundary = (e) => {
+      // Retain utterance globally to prevent Chromium GC freeze bug
+      state.currentUtterance = utterance;
+      window.__activeReadingUtterance = utterance;
+
+      let speechStartTime = 0;
+      let currentWordIndex = 0;
+      let hasFinished = false;
+
+      function highlightWordAtIndex(targetIdx) {
+        if (targetIdx < 0 || targetIdx >= wordSpans.length) return;
+        currentWordIndex = targetIdx;
+        clearWordHighlights();
+        wordSpans[targetIdx].classList.add('word-highlighted');
+      }
+
+      // Continuous time-stepper synchronization loop
+      function runCadenceStepper() {
+        if (!state.isReadingPlaying || hasFinished) return;
+        if (!speechStartTime) return;
+
+        const elapsedMs = performance.now() - speechStartTime;
+        // Find expected word from time milestone
+        for (let i = 0; i < wordMap.length; i++) {
+          if (elapsedMs >= wordMap[i].startMs && elapsedMs < wordMap[i].endMs) {
+            if (currentWordIndex !== i) {
+              highlightWordAtIndex(i);
+            }
+            break;
+          }
+        }
+
+        state.sentenceStepTimer = requestAnimationFrame(runCadenceStepper);
+      }
+
+      utterance.onstart = () => {
         if (!state.isReadingPlaying) return;
-        if (e.name === 'word') {
-          const charIdx = e.charIndex;
-          let matched = wordMap.find(item => charIdx >= item.start && charIdx < item.end);
-          if (!matched && wordMap.length > 0) {
-            let minDiff = 999;
-            for (const item of wordMap) {
-              const diff = Math.abs(item.start - charIdx);
-              if (diff < minDiff) {
-                minDiff = diff;
-                matched = item;
-              }
+        speechStartTime = performance.now();
+        highlightWordAtIndex(0);
+        state.sentenceStepTimer = requestAnimationFrame(runCadenceStepper);
+      };
+
+      // Native boundary reconciliation: if browser emits boundary, snap immediately
+      utterance.onboundary = (e) => {
+        if (!state.isReadingPlaying || hasFinished) return;
+        const charIdx = e.charIndex;
+        let matched = wordMap.find(item => charIdx >= item.start && charIdx < item.end);
+        if (!matched && wordMap.length > 0) {
+          let minDiff = 999;
+          for (const item of wordMap) {
+            const diff = Math.abs(item.start - charIdx);
+            if (diff < minDiff) {
+              minDiff = diff;
+              matched = item;
             }
           }
-          if (matched && matched.elem) {
-            clearWordHighlights();
-            matched.elem.classList.add('word-highlighted');
+        }
+        if (matched) {
+          highlightWordAtIndex(matched.index);
+          // Recalibrate start time to lock stepper to audio
+          if (speechStartTime > 0) {
+            speechStartTime = performance.now() - matched.startMs;
           }
         }
       };
 
-      utterance.onend = () => {
+      function completeSentence() {
+        if (hasFinished) return;
+        hasFinished = true;
+        if (state.sentenceStepTimer) {
+          cancelAnimationFrame(state.sentenceStepTimer);
+          state.sentenceStepTimer = null;
+        }
+        if (state.sentenceSafetyTimer) {
+          clearTimeout(state.sentenceSafetyTimer);
+          state.sentenceSafetyTimer = null;
+        }
         if (!state.isReadingPlaying) return;
         playNextSentence(index + 1);
-      };
+      }
+
+      utterance.onend = completeSentence;
 
       utterance.onerror = (err) => {
-        console.warn('Utterance error, skipping to next sentence:', err);
-        if (!state.isReadingPlaying) return;
-        playNextSentence(index + 1);
+        console.warn('Utterance error or interrupted, skipping to next sentence:', err);
+        completeSentence();
       };
+
+      // Chromium safety timeout (expected duration + 1800ms grace)
+      const safetyTimeoutMs = Math.max(3000, totalEstMs + 1800);
+      state.sentenceSafetyTimer = setTimeout(() => {
+        if (state.isReadingPlaying && !hasFinished) {
+          console.warn('Speech timeout failsafe triggered for sentence index:', index);
+          completeSentence();
+        }
+      }, safetyTimeoutMs);
 
       window.speechSynthesis.speak(utterance);
     }
@@ -1304,6 +1441,271 @@ document.addEventListener('DOMContentLoaded', () => {
     playSound('click');
   };
 
+
+  // ==========================================================================
+  // INTERACTIVE WORD DEFINITION & PHONETICS ENGINE
+  // ==========================================================================
+  function lookupWordMeaning(rawWord) {
+    if (!rawWord) return null;
+    const clean = rawWord.toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (!clean) return null;
+
+    // 1. Direct match in DATA.vocabulary (180 core curriculum words)
+    const vocabMatch = DATA.vocabulary.find(v => v.word.toLowerCase().replace(/[^a-z0-9]/g, '') === clean);
+    if (vocabMatch) {
+      return {
+        word: vocabMatch.word,
+        pos: vocabMatch.pos,
+        phonetic: vocabMatch.phonetic,
+        definition: vocabMatch.definition,
+        example: vocabMatch.example,
+        saudiContext: vocabMatch.saudiContext || null,
+        unit: vocabMatch.unit,
+        topic: vocabMatch.topic,
+        isCore: true,
+        root: null
+      };
+    }
+
+    // 2. Direct match in DATA.readingGlossary (588 curated reading terms)
+    if (DATA.readingGlossary && DATA.readingGlossary[clean]) {
+      const g = DATA.readingGlossary[clean];
+      return {
+        word: rawWord,
+        pos: g.pos,
+        phonetic: g.phonetic,
+        definition: g.definition,
+        example: g.example,
+        saudiContext: g.saudiContext || null,
+        unit: null,
+        topic: 'Reading Passage Vocabulary',
+        isCore: false,
+        root: null
+      };
+    }
+
+    // 3. Morphological Stemming / Lemmatization (De-inflection)
+    const candidates = [];
+    if (clean.endsWith('ies')) candidates.push({ stem: clean.slice(0, -3) + 'y', rule: 'Plural / 3rd-person form of' });
+    if (clean.endsWith('es')) candidates.push({ stem: clean.slice(0, -2), rule: 'Plural / 3rd-person form of' });
+    if (clean.endsWith('s') && !clean.endsWith('ss')) candidates.push({ stem: clean.slice(0, -1), rule: 'Plural / 3rd-person form of' });
+    if (clean.endsWith('ed')) {
+      candidates.push({ stem: clean.slice(0, -2), rule: 'Past tense / participle of' });
+      candidates.push({ stem: clean.slice(0, -1), rule: 'Past tense / participle of' });
+    }
+    if (clean.endsWith('ing')) {
+      candidates.push({ stem: clean.slice(0, -3), rule: 'Present participle / gerund of' });
+      candidates.push({ stem: clean.slice(0, -3) + 'e', rule: 'Present participle / gerund of' });
+      if (clean.length > 4 && clean[clean.length - 4] === clean[clean.length - 5]) {
+        candidates.push({ stem: clean.slice(0, -4), rule: 'Present participle of' });
+      }
+    }
+    if (clean.endsWith('ly')) candidates.push({ stem: clean.slice(0, -2), rule: 'Adverb derived from' });
+    if (clean.endsWith('er')) candidates.push({ stem: clean.slice(0, -2), rule: 'Comparative form of' });
+    if (clean.endsWith('est')) candidates.push({ stem: clean.slice(0, -3), rule: 'Superlative form of' });
+
+    for (const c of candidates) {
+      const vMatch = DATA.vocabulary.find(v => v.word.toLowerCase().replace(/[^a-z0-9]/g, '') === c.stem);
+      if (vMatch) {
+        return {
+          word: rawWord,
+          pos: vMatch.pos,
+          phonetic: vMatch.phonetic,
+          definition: `${c.rule} "${vMatch.word}": ${vMatch.definition}`,
+          example: vMatch.example,
+          saudiContext: vMatch.saudiContext || null,
+          unit: vMatch.unit,
+          topic: vMatch.topic,
+          isCore: true,
+          root: vMatch.word
+        };
+      }
+      if (DATA.readingGlossary && DATA.readingGlossary[c.stem]) {
+        const g = DATA.readingGlossary[c.stem];
+        return {
+          word: rawWord,
+          pos: g.pos,
+          phonetic: g.phonetic,
+          definition: `${c.rule} "${c.stem}": ${g.definition}`,
+          example: g.example,
+          saudiContext: g.saudiContext || null,
+          unit: null,
+          topic: 'Reading Passage Vocabulary',
+          isCore: false,
+          root: c.stem
+        };
+      }
+    }
+
+    // 4. Reverse Inflection Stemming (Checking if plural/participle form exists)
+    const reverseCandidates = [
+      { stem: clean + 's', rule: 'Singular / base form of' },
+      { stem: clean + 'es', rule: 'Singular / base form of' },
+      { stem: clean + 'ed', rule: 'Base verb form of' },
+      { stem: clean + 'd', rule: 'Base verb form of' },
+      { stem: clean + 'ing', rule: 'Base verb form of' }
+    ];
+
+    for (const rc of reverseCandidates) {
+      if (DATA.readingGlossary && DATA.readingGlossary[rc.stem]) {
+        const g = DATA.readingGlossary[rc.stem];
+        return {
+          word: rawWord,
+          pos: g.pos,
+          phonetic: g.phonetic,
+          definition: `${rc.rule} "${rc.stem}": ${g.definition}`,
+          example: g.example,
+          saudiContext: g.saudiContext || null,
+          unit: null,
+          topic: 'Reading Passage Vocabulary',
+          isCore: false,
+          root: rc.stem
+        };
+      }
+      const vMatch = DATA.vocabulary.find(v => v.word.toLowerCase().replace(/[^a-z0-9]/g, '') === rc.stem);
+      if (vMatch) {
+        return {
+          word: rawWord,
+          pos: vMatch.pos,
+          phonetic: vMatch.phonetic,
+          definition: `${rc.rule} "${vMatch.word}": ${vMatch.definition}`,
+          example: vMatch.example,
+          saudiContext: vMatch.saudiContext || null,
+          unit: vMatch.unit,
+          topic: vMatch.topic,
+          isCore: true,
+          root: vMatch.word
+        };
+      }
+    }
+
+    // 5. Synthesized fallback
+    return {
+      word: rawWord,
+      pos: 'Vocabulary Term',
+      phonetic: `/${clean}/`,
+      definition: 'English vocabulary term used in context within the reading passage.',
+      example: 'Observe how this word functions within the complete sentence.',
+      saudiContext: null,
+      unit: null,
+      topic: 'Contextual Word',
+      isCore: false,
+      root: null
+    };
+  }
+
+  // Interactive Word Popup Function
+  window.showWordMeaning = function(wordId, event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    // Pause reading audio so student can explore the word without clashing sound
+    if (state.isReadingPlaying) {
+      stopCurrentAudio();
+    }
+
+    const wordElem = document.getElementById(wordId);
+    if (!wordElem) return;
+
+    const rawWord = wordElem.getAttribute('data-word') || wordElem.innerText.trim();
+    const cleanWord = rawWord.replace(/[^a-zA-Z0-9]/g, '');
+    const displayText = wordElem.innerText.trim().replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, '');
+
+    const meaning = lookupWordMeaning(displayText || cleanWord);
+    if (!meaning) return;
+
+    // Locate parent sentence
+    const parentSentence = wordElem.closest('.sentence-span');
+    const sentenceId = parentSentence ? parentSentence.id : null;
+
+    // Highlight the clicked word gently
+    document.querySelectorAll('.word-span-selected').forEach(el => el.classList.remove('word-span-selected'));
+    wordElem.classList.add('word-span-selected');
+
+    // Build modal content
+    const modal = document.getElementById('wordMeaningModal');
+    const card = document.getElementById('wordMeaningCard');
+    if (!modal || !card) return;
+
+    card.innerHTML = `
+      <div class="word-popup-header">
+        <div class="word-popup-title-area">
+          <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+            <h3 class="word-popup-term">${displayText || meaning.word}</h3>
+            ${meaning.phonetic ? `<span class="word-popup-phonetic">${meaning.phonetic}</span>` : ''}
+          </div>
+          <div class="word-popup-badges" style="margin-top:0.45rem;">
+            <span class="word-badge-pos">${meaning.pos}</span>
+            ${meaning.isCore ? `<span class="word-badge-core">⭐ Super Goal 3 Core Vocabulary (Unit ${meaning.unit})</span>` : ''}
+            ${meaning.root ? `<span class="word-badge-root">Base Form: <strong>${meaning.root}</strong></span>` : ''}
+          </div>
+        </div>
+        <button class="word-popup-close" onclick="closeWordMeaningPopup()" title="Close definition popup">✕</button>
+      </div>
+
+      <div class="word-popup-body">
+        <div>
+          <div class="word-popup-section-label">English Definition:</div>
+          <p class="word-popup-definition">${meaning.definition}</p>
+        </div>
+
+        <div>
+          <div class="word-popup-section-label">Contextual Example:</div>
+          <div class="word-popup-example-box">
+            "${meaning.example}"
+          </div>
+        </div>
+
+        ${meaning.saudiContext ? `
+          <div>
+            <div class="word-popup-section-label">Saudi Cultural Heritage & Context:</div>
+            <div class="word-popup-saudi-box">
+              🇸🇦 <strong>Cultural Note:</strong> ${meaning.saudiContext}
+            </div>
+          </div>
+        ` : ''}
+      </div>
+
+      <div class="word-popup-actions">
+        <button class="word-popup-btn-speak" onclick="speakText('${(displayText || meaning.word).replace(/'/g, "\'")}')">
+          <span>🔊</span> Listen to Word
+        </button>
+        ${sentenceId ? `
+          <button class="word-popup-btn-sentence" onclick="closeWordMeaningPopup(); playSingleSentence('${sentenceId}')">
+            <span>▶</span> Play Full Sentence
+          </button>
+        ` : ''}
+      </div>
+    `;
+
+    modal.classList.add('active');
+    playSound('pop');
+    addXP(1);
+  };
+
+  window.closeWordMeaningPopup = function() {
+    const modal = document.getElementById('wordMeaningModal');
+    if (modal) {
+      modal.classList.remove('active');
+    }
+    document.querySelectorAll('.word-span-selected').forEach(el => el.classList.remove('word-span-selected'));
+  };
+
+  window.handleWordModalBackdropClick = function(event) {
+    if (event.target && event.target.id === 'wordMeaningModal') {
+      closeWordMeaningPopup();
+    }
+  };
+
+  // Keyboard accessibility: Escape key closes word popup
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeWordMeaningPopup();
+    }
+  });
+
   function renderReadingLounge() {
     const container = document.getElementById('reading-stories-content');
     if (!container) return;
@@ -1319,7 +1721,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="unit-switcher-buttons">
           ${DATA.readingStories.map(s => `
             <button class="section-unit-pill ${s.id === currentStory.id ? 'active' : ''}" onclick="selectStory('${s.id}')">
-              ${s.unit === 1 ? '📘' : '📗'} Unit ${s.unit}: ${s.title}
+              ${s.unit === 1 ? '📘' : (s.unit === 2 ? '📗' : (s.unit === 3 ? '✈️' : '🛒'))} Unit ${s.unit}: ${s.title}
             </button>
           `).join('')}
         </div>
@@ -1363,7 +1765,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const words = sText.trim().split(/\s+/);
         const wordSpans = words.map(w => {
           const wId = `w_${wordCounter++}`;
-          return `<span class="word-span" id="${wId}" data-word="${w.toLowerCase().replace(/[^a-z0-9]/g, '')}">${w}</span>`;
+          const clean = w.toLowerCase().replace(/[^a-z0-9]/g, '');
+          return `<span class="word-span" id="${wId}" data-word="${clean}" onclick="showWordMeaning('${wId}', event)" title="Click to view definition, IPA phonetics & audio">${w}</span>`;
         }).join(' ');
         return `<span class="sentence-span" id="${sId}" onclick="playSingleSentence('${sId}')" title="Click to listen to this sentence">${wordSpans}</span>`;
       }).join(' ');
@@ -1422,6 +1825,11 @@ document.addEventListener('DOMContentLoaded', () => {
               <div class="wave-bar"></div>
             </div>
           </div>
+        </div>
+
+        <!-- Interactive Vocabulary Tip Pill -->
+        <div style="margin-bottom:0.85rem; display:flex; align-items:center; gap:0.55rem; background:#fff7ed; border:1px solid #fed7aa; color:#9a3412; padding:0.5rem 1.1rem; border-radius:999px; font-size:0.85rem; font-weight:700; box-shadow:0 1px 3px rgba(231,113,63,0.08); width:fit-content;">
+          <span>💡</span> <strong>Interactive Vocabulary:</strong> Click any word in the passage to view its instant definition, IPA phonetics, and audio!
         </div>
 
         <!-- Highlightable Passage Canvas -->
@@ -1554,7 +1962,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="unit-switcher-buttons">
           ${DATA.writingLab.tasks.map(t => `
             <button class="section-unit-pill ${t.id === currentTask.id ? 'active' : ''}" onclick="selectWritingTask('${t.id}')">
-              ${t.unit === 1 ? '📘' : '📗'} Unit ${t.unit} Task: ${t.title}
+              ${t.unit === 1 ? '📘' : (t.unit === 2 ? '📗' : (t.unit === 3 ? '✈️' : '🛒'))} Unit ${t.unit} Task: ${t.title}
             </button>
           `).join('')}
         </div>
@@ -1727,13 +2135,19 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="unit-switcher-buttons">
           <button class="section-unit-pill ${filter === 'all' ? 'active' : ''}" onclick="filterDiscussionUnit('all')">
-            🌟 All Scenarios (1–6)
+            🌟 All Scenarios (1–12)
           </button>
           <button class="section-unit-pill ${filter === 1 || filter === '1' ? 'active' : ''}" onclick="filterDiscussionUnit(1)">
             📘 Unit 1: Lifestyles (1–3)
           </button>
           <button class="section-unit-pill ${filter === 2 || filter === '2' ? 'active' : ''}" onclick="filterDiscussionUnit(2)">
             📗 Unit 2: Life Stories (4–6)
+          </button>
+          <button class="section-unit-pill ${filter === 3 || filter === '3' ? 'active' : ''}" onclick="filterDiscussionUnit(3)">
+            ✈️ Unit 3: Travel (7–9)
+          </button>
+          <button class="section-unit-pill ${filter === 4 || filter === '4' ? 'active' : ''}" onclick="filterDiscussionUnit(4)">
+            🛒 Unit 4: Food & Dining (10–12)
           </button>
         </div>
       </div>
@@ -1743,7 +2157,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div style="display:flex; flex-wrap:wrap; gap:0.55rem; margin-bottom:1.5rem;">
         ${discsToRender.map(d => `
           <button class="section-unit-pill ${d.id === currentDisc.id ? 'active' : ''}" onclick="selectDiscussion('${d.id}')">
-            ${d.unit === 1 ? '📘' : '📗'} Scenario ${d.id.replace('d', '')}: ${d.title.split(':')[0]}
+            ${d.unit === 1 ? '📘' : (d.unit === 2 ? '📗' : (d.unit === 3 ? '✈️' : '🛒'))} ${d.title.split(':')[0]}
           </button>
         `).join('')}
       </div>
@@ -1830,10 +2244,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.filterDiscussionUnit = function(unitVal) {
     state.discussionFilter = unitVal;
-    if (unitVal === 1 && !['d1', 'd2', 'd3'].includes(state.currentDiscussionId)) {
-      state.currentDiscussionId = 'd1';
-    } else if (unitVal === 2 && !['d4', 'd5', 'd6'].includes(state.currentDiscussionId)) {
-      state.currentDiscussionId = 'd4';
+    if (unitVal === 1 && !['u1_d1', 'u1_d2', 'u1_d3'].includes(state.currentDiscussionId)) {
+      state.currentDiscussionId = 'u1_d1';
+    } else if (unitVal === 2 && !['u2_d1', 'u2_d2', 'u2_d3'].includes(state.currentDiscussionId)) {
+      state.currentDiscussionId = 'u2_d1';
+    } else if (unitVal === 3 && !['u3_d1', 'u3_d2', 'u3_d3'].includes(state.currentDiscussionId)) {
+      state.currentDiscussionId = 'u3_d1';
+    } else if (unitVal === 4 && !['u4_d1', 'u4_d2', 'u4_d3'].includes(state.currentDiscussionId)) {
+      state.currentDiscussionId = 'u4_d1';
     }
     renderDiscussionArena();
     playSound('click');
@@ -1879,6 +2297,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const examsToRender = DATA.exams.filter(ex => {
       if (curExamFilter === 'u1') return ex.unit === 1;
       if (curExamFilter === 'u2') return ex.unit === 2;
+      if (curExamFilter === 'u3') return ex.unit === 3;
+      if (curExamFilter === 'u4') return ex.unit === 4;
       return true;
     });
 
@@ -2408,7 +2828,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     const issueDate = new Date().toLocaleDateString('en-US', dateOptions);
-    const serialCode = `SG2-${(examId || 'MASTER').toUpperCase()}-${Math.floor(100000 + Math.random() * 900000)}`;
+    const serialCode = `SG3-${(examId || 'MASTER').toUpperCase()}-${Math.floor(100000 + Math.random() * 900000)}`;
 
     const overlay = document.createElement('div');
     overlay.className = 'modal-overlay';
@@ -2454,7 +2874,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="cert-student-name">${studentName}</div>
 
           <div class="cert-body-text">
-            in formal recognition of outstanding linguistic competence, superior grammatical command, and lexical mastery across <strong>Super Goal 3 (Units 1 & 2: Lifestyles & Life Stories)</strong>, including daily routines, frequency adverbs, personal biographies, historical milestones, habitual actions with 'used to', Simple Past inflections, passive expressions with 'be + born', community service, and visionary leadership under the Custodian of the Two Holy Mosques King Salman bin Abdulaziz.
+            in formal recognition of outstanding linguistic competence, superior grammatical command, and lexical mastery across <strong>Super Goal 3 (Units 1–4: Complete Term 1 Curriculum Suite)</strong>, including daily routines, frequency adverbs, personal biographies, historical milestones, habitual actions with 'used to', Simple Past inflections, passive expressions with 'be + born', community service, and visionary leadership under the Custodian of the Two Holy Mosques King Salman bin Abdulaziz.
           </div>
 
           <div class="cert-meta-grid">

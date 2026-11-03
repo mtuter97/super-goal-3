@@ -2277,10 +2277,26 @@ body {
 
 .word-span {
   display: inline-block;
-  margin: 0 1px;
+  margin: 0 1.5px;
   border-radius: 4px;
-  padding: 1px 3px;
-  transition: background-color 0.08s ease, color 0.08s ease, transform 0.08s ease;
+  padding: 1px 3.5px;
+  cursor: pointer;
+  transition: background-color 0.12s ease, color 0.12s ease, transform 0.12s ease, box-shadow 0.12s ease;
+  position: relative;
+}
+
+.word-span:hover {
+  background: rgba(231, 113, 63, 0.16);
+  color: var(--primary-coral-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  border-radius: 4px;
+}
+
+.word-span.word-span-selected {
+  background: rgba(231, 113, 63, 0.22);
+  outline: 1.5px solid var(--primary-coral);
+  outline-offset: 1px;
 }
 
 .word-span.word-highlighted {
@@ -2289,6 +2305,263 @@ body {
   font-weight: 800 !important;
   box-shadow: 0 0 14px rgba(217, 119, 6, 0.5) !important;
   transform: scale(1.08) !important;
+  text-decoration: none !important;
+}
+
+/* ==========================================================================
+   INTERACTIVE WORD MEANING MODAL & FLOATING CARD
+   ========================================================================== */
+.word-popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  padding: 1.25rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+.word-popup-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.word-popup-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 520px;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(231, 113, 63, 0.2);
+  overflow: hidden;
+  transform: translateY(16px) scale(0.96);
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: modalBounceIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalBounceIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.word-popup-header {
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  padding: 1.35rem 1.6rem;
+  border-bottom: 1.5px solid #fed7aa;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.word-popup-title-area {
+  flex: 1;
+}
+
+.word-popup-term {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.word-popup-phonetic {
+  font-family: 'Fira Code', 'Roboto Mono', monospace;
+  font-size: 1rem;
+  color: #c2410c;
+  font-weight: 700;
+  background: rgba(231, 113, 63, 0.12);
+  padding: 0.18rem 0.55rem;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.word-popup-close {
+  background: rgba(15, 23, 42, 0.08);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+  transition: all 0.18s ease;
+  flex-shrink: 0;
+}
+
+.word-popup-close:hover {
+  background: #ef4444;
+  color: #ffffff;
+  transform: rotate(90deg) scale(1.08);
+}
+
+.word-popup-body {
+  padding: 1.4rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.word-popup-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.word-badge-pos {
+  background: #e0f2fe;
+  color: #0369a1;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.28rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid #bae6fd;
+}
+
+.word-badge-core {
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0.28rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid #fde68a;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.word-badge-root {
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.28rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid #e2e8f0;
+}
+
+.word-popup-section-label {
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #64748b;
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.word-popup-definition {
+  font-size: 1.05rem;
+  color: #0f172a;
+  line-height: 1.55;
+  font-weight: 600;
+  margin: 0;
+}
+
+.word-popup-example-box {
+  background: #f8fafc;
+  border-left: 3.5px solid var(--primary-coral);
+  padding: 0.85rem 1.1rem;
+  border-radius: 0 10px 10px 0;
+  font-size: 0.95rem;
+  color: #334155;
+  font-style: italic;
+  line-height: 1.5;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+
+.word-popup-saudi-box {
+  background: #ecfdf5;
+  border: 1.2px solid #a7f3d0;
+  padding: 0.85rem 1.1rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: #065f46;
+  line-height: 1.45;
+}
+
+.word-popup-actions {
+  display: flex;
+  gap: 0.85rem;
+  padding: 1.1rem 1.6rem 1.35rem;
+  background: #fafaf9;
+  border-top: 1px solid #e7e5e4;
+  flex-wrap: wrap;
+}
+
+.word-popup-btn-speak {
+  flex: 1;
+  min-width: 140px;
+  background: linear-gradient(135deg, #e7713f 0%, #c2410c 100%);
+  color: #ffffff;
+  border: none;
+  padding: 0.72rem 1.1rem;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 0.92rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.18s ease;
+  box-shadow: 0 3px 10px rgba(231, 113, 63, 0.3);
+}
+
+.word-popup-btn-speak:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(231, 113, 63, 0.4);
+}
+
+.word-popup-btn-sentence {
+  flex: 1.3;
+  min-width: 160px;
+  background: #ffffff;
+  color: #0f172a;
+  border: 1.5px solid #cbd5e1;
+  padding: 0.72rem 1.1rem;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 0.92rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.18s ease;
+}
+
+.word-popup-btn-sentence:hover {
+  border-color: var(--primary-coral);
+  color: var(--primary-coral-dark);
+  background: #fff7ed;
+  transform: translateY(-1px);
 }
 
 /* Teacher Social & Contact Bar */
@@ -2384,12 +2657,18 @@ body {
 }
 
 
-.grid-1 {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
+.grid-1 {
+
+  display: grid;
+
+  grid-template-columns: 1fr;
+
+  gap: 1.5rem;
+
+}
+
+
+
 /* ==========================================================================
    MASTER UNIT NAVIGATION SWITCHER BAR
    ========================================================================== */
