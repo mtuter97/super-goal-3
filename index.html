@@ -22,6 +22,35 @@
 
   <!-- Main Header -->
   <header class="app-header">
+    <!-- Top Moving Star Student Honor Bar (Passes every 5 minutes) -->
+    <div class="star-student-ticker-bar" id="starStudentTickerBar" aria-label="Star Student Honor Ticker">
+      <div class="ticker-lead-badge">
+        <span class="ticker-pulse-dot" aria-hidden="true"></span>
+        <span class="ticker-badge-icon">👑</span>
+        <span class="ticker-badge-text">Star Student</span>
+      </div>
+      <div class="ticker-viewport" id="tickerViewport">
+        <div class="ticker-track" id="starStudentTrack">
+          <span class="ticker-star">🌟</span>
+          <span class="ticker-lead-text">Academic Honor Roll:</span>
+          <span class="ticker-student-name" id="tickerStudentName">Student of Distinction</span>
+          <span class="ticker-divider">•</span>
+          <span class="ticker-xp-badge"><strong id="tickerStudentXP">0</strong> XP</span>
+          <span class="ticker-divider">•</span>
+          <span class="ticker-course">Super Goal 3 (Intermediate 3rd Grade)</span>
+          <span class="ticker-divider">•</span>
+          <span class="ticker-supervisor">Supervisor: Teacher Mahmoud Al-Saeed</span>
+          <span class="ticker-star">🌟</span>
+        </div>
+      </div>
+      <button class="ticker-timer-pill" id="tickerTimerPill" type="button" title="Honor Roll ticker passes across screen every 5 minutes. Click to preview pass now!">
+        <span class="ticker-timer-icon">⏱️</span>
+        <span class="ticker-timer-label">Passes every 5m:</span>
+        <strong id="tickerTimerCountdown">5:00</strong>
+        <span class="ticker-pass-btn">▶ Pass Now</span>
+      </button>
+    </div>
+
     <div class="header-top">
       <div class="brand-wrapper">
         <div class="brand-logo-container">
@@ -131,8 +160,11 @@
       <div class="passport-rewards">
         <div class="xp-counter-card">
           <span class="xp-label">Learning Score</span>
-          <span class="xp-val"><strong id="studentXPDisplay">100</strong> XP</span>
+          <span class="xp-val"><strong id="studentXPDisplay">0</strong> XP</span>
         </div>
+        <button class="btn-xp-reset" id="resetXPBtn" type="button" title="Reset Learning Score to 0 XP to start fresh">
+          🔄 Reset XP
+        </button>
         <button class="btn-cert-direct" id="directCertBtn">
           🎓 Official Certificate
         </button>

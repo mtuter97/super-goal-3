@@ -3,8 +3,8 @@
 > **Course:** Super Goal 3 (Intermediate Third Grade – Term 1)  
 > **Authority:** Saudi Ministry of Education Curriculum Standards (McGraw-Hill)  
 > **Supervising Instructor:** Teacher Mahmoud Al-Saeed  
-> **Version:** 4.1 (Term 1 Complete + Interactive Word Definitions & Precision Audio-Highlight Sync)  
-> **Last Updated:** November 2026 (Phase 4.1: Reading Lounge Audio-Visual Synchronization & Vocabulary Discovery Engine)
+> **Version:** 4.2 (Zero-Start Gamification Score Engine + Top Moving Star Student Honor Ticker System)  
+> **Last Updated:** November 2026 (Phase 4.2: 0-XP Baseline Initialization, Real-time Student Identity Registration Bonus & 5-Minute Recurring Top Honor Ticker)
 
 ---
 
@@ -38,9 +38,11 @@ When extending or maintaining this project in any session, adhere strictly to th
    - Secondary Tech Accents: **Slate Charcoal** (`#2d3748`) and **Sky Blue** (`#0284c7`).
    - The Teacher Logo must remain prominently visible in the header (with a verified badge), footer, and as an elegant transparent background watermark on the official certificate.
    - Official Instructor Communication Channels (WhatsApp direct inquiry without raw digit display, YouTube channel, and LinkedIn profile) are accessible in the header, footer, and certificate preview modal.
-4. **Interactive Student Registration & Certification Gateway:**  
-   - Top-level **Student Passport Bar** where students enter their English name and school.
-   - Persistent `localStorage` tracking for student identity and gamified XP points.
+4. **Interactive Student Registration, Gamification & Star Student Ticker:**  
+   - **0-XP Baseline Start:** All students begin strictly at 0 XP (`sg3_student_xp`). Obsolete legacy session storage is automatically purged.
+   - **Real-time Name Registration Bonus:** Typing student name into the passport and registering grants an instant welcome bonus (+25 XP) and synchronizes with official certificates.
+   - **Comprehensive Exercise Progression:** XP points are systematically accumulated across all activities (Flashcards, Word Meaning Discovery, Grammar Diagnostics, Pronunciation Labs, Reading Stories & Questions, Writing Studio Evaluations, Discussion Arena, and 20 Final Exams).
+   - **Top Moving Star Student Honor Bar:** Prominently featured at the top of the app header, displaying the Star Student's name, current XP, and curriculum scope. Automatically traverses/passes across the screen once every 5 minutes (with an immediate introductory pass on launch, live countdown clock, and instant preview trigger).
    - Direct button `📜 Claim Certificate` allowing students to preview, generate, and print their official Certificate of Distinction.
 5. **Authentic Saudi Cultural Context in Every Section:**  
    - Real photos from Saudi Arabia: Holy Kaaba, Grand Mosque Expansion, Al-Ula Hegra UNESCO monument, Vision 2030 future skyline, Islamic calligraphy, Quality of Life athletic clubs, King Salman humanitarian relief (KSrelief), and HRH Prince Sultan bin Salman historic spaceflight.

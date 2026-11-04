@@ -11,12 +11,19 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  // Clean legacy Super Goal 2 storage to ensure clean 0 XP start for Super Goal 3
+  try {
+    if (localStorage.getItem('sg2_student_xp')) localStorage.removeItem('sg2_student_xp');
+    if (localStorage.getItem('sg2_student_name')) localStorage.removeItem('sg2_student_name');
+    if (localStorage.getItem('sg2_student_school')) localStorage.removeItem('sg2_student_school');
+  } catch (e) {}
+
   // Application State
   const state = {
     currentTab: 'overview',
-    studentName: localStorage.getItem('sg2_student_name') || 'Abdullah Al-Otaibi',
-    studentSchool: localStorage.getItem('sg2_student_school') || 'Riyadh Intermediate School',
-    studentXP: parseInt(localStorage.getItem('sg2_student_xp') || '120', 10),
+    studentName: localStorage.getItem('sg3_student_name') || '',
+    studentSchool: localStorage.getItem('sg3_student_school') || '',
+    studentXP: parseInt(localStorage.getItem('sg3_student_xp') || '0', 10),
     deepgramApiKey: localStorage.getItem('deepgram_api_key') || '',
     deepgramVoice: localStorage.getItem('deepgram_voice') || 'aura-asteria-en', // Natural American Voice
     speechRate: parseFloat(localStorage.getItem('preferred_speech_rate')) || 1.0,
@@ -51,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     currentReadingStoryId: 'u1_reading_lifestyles',
     currentWritingTaskId: 'u1_w1',
     currentDiscussionId: 'u1_d1',
-    theme: localStorage.getItem('sg2_theme') || 'light'
+    theme: localStorage.getItem('sg3_theme') || 'light'
   };
 
   // Sound Synthesizer via Web Audio API (Chimes, Clicks & Exam Feedback)
@@ -263,14 +270,97 @@ document.addEventListener('DOMContentLoaded', () => {
     window.speechSynthesis.speak(utterance);
   }
 
+  // ==========================================================================
+  // TOP MOVING STAR STUDENT HONOR BAR (Passes every 5 minutes)
+  // ==========================================================================
+  let tickerCountdownSeconds = 300; // 5 minutes = 300 seconds
+  let tickerIntervalTimer = null;
+  let isTickerPassing = false;
+
+  function updateTickerContent() {
+    const nameElem = document.getElementById('tickerStudentName');
+    const xpElem = document.getElementById('tickerStudentXP');
+    const hasName = state.studentName && state.studentName.trim().length > 0;
+    const displayName = hasName ? state.studentName.trim() : 'Student of Distinction';
+
+    if (nameElem) nameElem.textContent = displayName;
+    if (xpElem) xpElem.textContent = state.studentXP.toString();
+  }
+
+  function launchTickerPass() {
+    const track = document.getElementById('starStudentTrack');
+    if (!track) return;
+
+    updateTickerContent();
+
+    // Trigger CSS animation cleanly
+    track.classList.remove('passing');
+    void track.offsetWidth; // Force reflow
+    track.classList.add('passing');
+    isTickerPassing = true;
+
+    // Reset 5-minute countdown clock
+    tickerCountdownSeconds = 300;
+    updateTickerCountdownDisplay();
+
+    try {
+      playSound('pop');
+    } catch(e) {}
+  }
+
+  function updateTickerCountdownDisplay() {
+    const countdownElem = document.getElementById('tickerTimerCountdown');
+    if (!countdownElem) return;
+    const mins = Math.floor(tickerCountdownSeconds / 60);
+    const secs = tickerCountdownSeconds % 60;
+    countdownElem.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  }
+
+  function initStarStudentTicker() {
+    updateTickerContent();
+
+    const track = document.getElementById('starStudentTrack');
+    if (track) {
+      track.addEventListener('animationend', () => {
+        track.classList.remove('passing');
+        isTickerPassing = false;
+      });
+    }
+
+    const pill = document.getElementById('tickerTimerPill');
+    if (pill) {
+      pill.addEventListener('click', () => {
+        launchTickerPass();
+      });
+    }
+
+    // Launch immediate celebratory pass on load so user sees it right away
+    setTimeout(() => {
+      launchTickerPass();
+    }, 1200);
+
+    // 5-Minute Timer (checks every second)
+    if (tickerIntervalTimer) clearInterval(tickerIntervalTimer);
+    tickerIntervalTimer = setInterval(() => {
+      if (tickerCountdownSeconds > 0) {
+        tickerCountdownSeconds--;
+        updateTickerCountdownDisplay();
+      } else {
+        // 5 minutes reached: Launch pass!
+        launchTickerPass();
+      }
+    }, 1000);
+  }
+
   // Gamification XP Addition
   function addXP(points) {
     state.studentXP += points;
-    localStorage.setItem('sg2_student_xp', state.studentXP.toString());
+    localStorage.setItem('sg3_student_xp', state.studentXP.toString());
     const xpElem = document.getElementById('studentXPDisplay');
     if (xpElem) {
       xpElem.textContent = state.studentXP.toString();
     }
+    updateTickerContent();
   }
 
   // Student Passport Initialization & Sync
@@ -281,11 +371,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const nameInput = document.getElementById('regStudentName');
     const schoolInput = document.getElementById('regStudentSchool');
 
-    if (nameDisplay) nameDisplay.textContent = state.studentName;
-    if (schoolDisplay) schoolDisplay.textContent = `${state.studentSchool} • Saudi Arabia`;
+    const hasName = state.studentName && state.studentName.trim().length > 0;
+    const hasSchool = state.studentSchool && state.studentSchool.trim().length > 0;
+
+    if (nameDisplay) {
+      nameDisplay.textContent = hasName ? state.studentName.trim() : 'Student of Distinction';
+    }
+    if (schoolDisplay) {
+      schoolDisplay.textContent = hasSchool ? `${state.studentSchool.trim()} • Saudi Arabia` : 'Intermediate Third Grade • Saudi Arabia';
+    }
     if (xpDisplay) xpDisplay.textContent = state.studentXP.toString();
     if (nameInput) nameInput.value = state.studentName;
     if (schoolInput) schoolInput.value = state.studentSchool;
+
+    updateTickerContent();
   }
 
   const savePassportBtn = document.getElementById('savePassportBtn');
@@ -293,18 +392,68 @@ document.addEventListener('DOMContentLoaded', () => {
     savePassportBtn.addEventListener('click', () => {
       const nameIn = document.getElementById('regStudentName');
       const schoolIn = document.getElementById('regStudentSchool');
-      if (nameIn && nameIn.value.trim()) {
-        state.studentName = nameIn.value.trim();
-        localStorage.setItem('sg2_student_name', state.studentName);
+      const enteredName = nameIn ? nameIn.value.trim() : '';
+      const enteredSchool = schoolIn ? schoolIn.value.trim() : '';
+
+      if (!enteredName) {
+        alert('Please type your name in the input box to register your Student Identity and earn XP points!');
+        if (nameIn) nameIn.focus();
+        return;
       }
-      if (schoolIn && schoolIn.value.trim()) {
-        state.studentSchool = schoolIn.value.trim();
-        localStorage.setItem('sg2_student_school', state.studentSchool);
+
+      state.studentName = enteredName;
+      localStorage.setItem('sg3_student_name', state.studentName);
+
+      if (enteredSchool) {
+        state.studentSchool = enteredSchool;
+        localStorage.setItem('sg3_student_school', state.studentSchool);
       }
-      addXP(25);
+
+      // Award points for writing/registering name!
+      const hasBonus = localStorage.getItem('sg3_reg_bonus');
+      if (!hasBonus) {
+        addXP(25);
+        localStorage.setItem('sg3_reg_bonus', 'true');
+        alert(`🎉 Student identity successfully registered for: ${state.studentName}!\n\n⭐ +25 XP awarded as Welcome & Registration Bonus!\nYour name is now featured on the top Star Student Ticker.`);
+      } else {
+        addXP(5);
+        alert(`Student identity updated for: ${state.studentName}!\nOfficial certificates and Star Student Ticker have been synchronized.`);
+      }
+
       syncStudentPassport();
+      launchTickerPass();
       playSound('correct');
-      alert(`Student identity successfully registered for: ${state.studentName}!\nThis name will now appear on all official Certificates endorsed by Teacher Mahmoud Al-Saeed.`);
+    });
+  }
+
+  // Pressing Enter in passport inputs automatically registers
+  const regNameInput = document.getElementById('regStudentName');
+  const regSchoolInput = document.getElementById('regStudentSchool');
+  [regNameInput, regSchoolInput].forEach(inp => {
+    if (inp) {
+      inp.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          if (savePassportBtn) savePassportBtn.click();
+        }
+      });
+    }
+  });
+
+  // Reset XP Button
+  const resetXPBtn = document.getElementById('resetXPBtn');
+  if (resetXPBtn) {
+    resetXPBtn.addEventListener('click', () => {
+      if (confirm('Reset your Learning Score to 0 XP to start fresh?')) {
+        state.studentXP = 0;
+        localStorage.setItem('sg3_student_xp', '0');
+        localStorage.removeItem('sg3_reg_bonus');
+        const xpElem = document.getElementById('studentXPDisplay');
+        if (xpElem) xpElem.textContent = '0';
+        updateTickerContent();
+        playSound('click');
+        alert('Learning Score has been reset to 0 XP. Type your name and start solving exercises to earn points!');
+      }
     });
   }
 
@@ -2805,7 +2954,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('certStudentNameInput');
     const name = input && input.value.trim() ? input.value.trim() : state.studentName;
     state.studentName = name;
-    localStorage.setItem('sg2_student_name', name);
+    localStorage.setItem('sg3_student_name', name);
     syncStudentPassport();
     showCertificateModal(name, examTitle, pct, gradeLetter, examId);
   };
@@ -2926,6 +3075,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initial Initialization
   syncStudentPassport();
+  initStarStudentTicker();
   renderOverview();
   applyVocabFilters();
   renderGrammarAcademy();

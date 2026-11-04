@@ -115,6 +115,212 @@ body {
    HEADER & BRANDING (Teacher Logo)
    ========================================================================== */
 
+/* ==========================================================================
+   TOP MOVING STAR STUDENT HONOR BAR (Passes Every 5 Minutes)
+   ========================================================================== */
+
+.star-student-ticker-bar {
+  background: linear-gradient(90deg, #064e3b 0%, #047857 25%, #059669 50%, #047857 75%, #064e3b 100%);
+  color: #ffffff;
+  border-bottom: 2px solid #d97706;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  height: 40px;
+  font-size: 0.82rem;
+  z-index: 1001;
+}
+
+.ticker-lead-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  color: #ffffff;
+  padding: 0 1rem;
+  height: 100%;
+  font-weight: 800;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.25);
+  z-index: 4;
+  flex-shrink: 0;
+}
+
+.ticker-pulse-dot {
+  width: 9px;
+  height: 9px;
+  background-color: #34d399;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 rgba(52, 211, 153, 0.7);
+  animation: tickerDotPulse 1.8s infinite;
+}
+
+@keyframes tickerDotPulse {
+  0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.8); }
+  70% { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+
+.ticker-badge-icon {
+  font-size: 1rem;
+}
+
+.ticker-viewport {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.ticker-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  white-space: nowrap;
+  width: 100%;
+  position: relative;
+  font-weight: 500;
+  color: #f1f5f9;
+}
+
+/* In passing mode: text detaches from center and travels smoothly across screen */
+.ticker-track.passing {
+  width: max-content;
+  position: absolute;
+  left: 0;
+  animation: tickerMarqueeGlide 24s linear forwards;
+}
+
+@keyframes tickerMarqueeGlide {
+  0% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.ticker-star {
+  font-size: 0.95rem;
+  filter: drop-shadow(0 0 4px #fef08a);
+}
+
+.ticker-lead-text {
+  color: #fef08a;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.ticker-student-name {
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.92rem;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.15rem 0.65rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.ticker-xp-badge {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #ffffff;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.78rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.ticker-divider {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.ticker-course,
+.ticker-supervisor {
+  color: #e2e8f0;
+  font-size: 0.8rem;
+}
+
+.ticker-timer-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(0, 0, 0, 0.25);
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  margin-right: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  z-index: 4;
+  flex-shrink: 0;
+}
+
+.ticker-timer-pill:hover {
+  background: rgba(0, 0, 0, 0.45);
+  border-color: #f59e0b;
+  color: #fef08a;
+  transform: translateY(-1px);
+}
+
+.ticker-timer-pill strong {
+  font-family: 'Outfit', monospace;
+  color: #fef08a;
+  font-size: 0.85rem;
+}
+
+.ticker-pass-btn {
+  background: #f59e0b;
+  color: #78350f;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin-left: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.ticker-timer-pill:hover .ticker-pass-btn {
+  background: #fef08a;
+  color: #451a03;
+}
+
+@media (max-width: 768px) {
+  .star-student-ticker-bar {
+    height: 36px;
+    font-size: 0.76rem;
+  }
+  .ticker-lead-badge {
+    padding: 0 0.55rem;
+    font-size: 0.7rem;
+  }
+  .ticker-badge-text {
+    display: none;
+  }
+  .ticker-timer-label {
+    display: none;
+  }
+  .ticker-timer-pill {
+    padding: 0.2rem 0.5rem;
+    margin-right: 0.4rem;
+  }
+}
+
 .app-header {
   background: #ffffff;
   border-bottom: 2px solid var(--border-color);
@@ -428,6 +634,29 @@ body {
   font-size: 1.1rem;
   font-weight: 800;
   color: var(--accent-gold);
+}
+
+.btn-xp-reset {
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.btn-xp-reset:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #dc2626;
+  transform: translateY(-1px);
 }
 
 .btn-cert-direct {
