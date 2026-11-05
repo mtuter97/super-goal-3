@@ -82,6 +82,9 @@
         </div>
       </div>
       <div class="header-controls">
+        <button class="cert-quick-btn" id="studentDbBtn" onclick="openStudentDbModal()" title="View Student Database & Records" style="background:var(--accent-charcoal); color:#ffffff; border:1px solid rgba(255,255,255,0.2);">
+          🗄️ Student Database
+        </button>
         <button class="deepgram-toggle-btn" id="deepgramSettingsBtn" title="Configure Deepgram American Natural Voice">
           🎙️ Deepgram Voice
         </button>
@@ -101,7 +104,7 @@
       <button class="nav-tab-btn" data-tab="reading">📖 Reading Stories Lounge</button>
       <button class="nav-tab-btn" data-tab="writing">✍️ Writing Master Studio</button>
       <button class="nav-tab-btn" data-tab="discussions">💬 Discussion Arena</button>
-      <button class="nav-tab-btn nav-tab-exam-highlight" data-tab="exams">🎯 Examination Suite (20 Exams)</button>
+      <button class="nav-tab-btn nav-tab-exam-highlight" data-tab="exams">🎯 Examination Suite (22 Exams)</button>
     </nav>
   </header>
 
@@ -383,6 +386,151 @@
   <div id="wordMeaningModal" class="word-popup-backdrop" onclick="handleWordModalBackdropClick(event)">
     <div class="word-popup-card" id="wordMeaningCard">
       <!-- Injected dynamically by showWordMeaning() in app.js -->
+    </div>
+  </div>
+
+  <!-- Mandatory Student Admission & Identity Gateway Modal (Non-dismissible until registered) -->
+  <div id="mandatoryAdmissionModal" class="admission-modal-overlay" style="display:none;">
+    <div class="admission-modal-card">
+      <div class="admission-badge-header">
+        <img src="assets/images/teacher_logo.jpg" alt="Official Teacher Logo" class="admission-logo">
+        <div class="admission-header-text">
+          <span class="badge-required">Mandatory Student Admission</span>
+          <h3>Super Goal 3 Academic Learning Passport</h3>
+          <p>Official Intermediate Third Grade Educational Platform • Term 1</p>
+        </div>
+      </div>
+      
+      <div class="admission-welcome-note">
+        <p><strong>Welcome, Student!</strong> In accordance with official standards supervised by <strong>Teacher Mahmoud Al-Saeed</strong>, you must register your English name and school before accessing lessons and activities. All students begin strictly at <strong>0 XP</strong>.</p>
+      </div>
+
+      <form id="mandatoryAdmissionForm" onsubmit="handleMandatoryAdmission(event)">
+        <div class="form-group-admission">
+          <label for="admissionFullName">Full Student Name in English <span class="required-star">*</span></label>
+          <input type="text" id="admissionFullName" class="admission-input" placeholder="e.g. Abdullah Al-Otaibi" autocomplete="name" required minlength="3">
+          <small class="admission-hint">Type your first and family name using English letters.</small>
+        </div>
+
+        <div class="form-group-admission">
+          <label for="admissionSchoolName">School / Educational Institution <span class="required-star">*</span></label>
+          <input type="text" id="admissionSchoolName" class="admission-input" placeholder="e.g. Al-Falah Intermediate School, Riyadh" autocomplete="organization" required minlength="3">
+          <small class="admission-hint">Specify your current school name and city.</small>
+        </div>
+
+        <div id="admissionErrorAlert" class="admission-error-alert" style="display:none;"></div>
+
+        <div class="admission-actions">
+          <button type="submit" class="btn-admission-submit" id="admissionSubmitBtn">
+            🚀 Register Identity & Begin at 0 XP
+          </button>
+        </div>
+      </form>
+      
+      <div class="admission-footer-note">
+        <span>🔒 Secure Student Database Architecture • Certified by Teacher Mahmoud Al-Saeed</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supervisor & Teacher Student Database Records Modal -->
+  <div id="studentDbModal" class="admission-modal-overlay" style="display:none;">
+    <div class="student-db-modal-box">
+      <div class="deepgram-modal-header">
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <img src="assets/images/teacher_logo.jpg" alt="Teacher Logo" style="width:42px; height:42px; border-radius:50%; border:2px solid var(--primary-coral);">
+          <div>
+            <h3 style="font-family:'Outfit',sans-serif; font-size:1.35rem; color:var(--accent-slate-dark); margin:0;">
+              Super Goal 3 Student Database & Records
+            </h3>
+            <p style="font-size:0.82rem; color:var(--text-muted); margin:0.2rem 0 0 0;">
+              Supervising Instructor: Teacher Mahmoud Al-Saeed • Native IndexedDB & Serverless Architecture
+            </p>
+          </div>
+        </div>
+        <button class="image-modal-close" onclick="closeStudentDbModal()">✕</button>
+      </div>
+
+      <div class="student-db-modal-body">
+        <!-- Summary Stats Cards -->
+        <div class="db-stats-row">
+          <div class="db-stat-card">
+            <span class="db-stat-num" id="dbTotalStudents">0</span>
+            <span class="db-stat-label">Registered Students</span>
+          </div>
+          <div class="db-stat-card">
+            <span class="db-stat-num" id="dbTotalExams">0</span>
+            <span class="db-stat-label">Archived Exam Submissions</span>
+          </div>
+          <div class="db-stat-card">
+            <span class="db-stat-num" id="dbTopXP">0 XP</span>
+            <span class="db-stat-label">Highest Student Score</span>
+          </div>
+          <div class="db-stat-card">
+            <span class="db-stat-num" id="dbAvgScore">0%</span>
+            <span class="db-stat-label">Average Performance</span>
+          </div>
+        </div>
+
+        <!-- Database Action Buttons -->
+        <div class="db-toolbar">
+          <button class="btn-db-action" onclick="exportDatabaseJSON()">
+            📥 Export Full Database (JSON)
+          </button>
+          <button class="btn-db-action" onclick="exportRecordsCSV()">
+            📊 Export Exam Records (CSV)
+          </button>
+          <button class="btn-db-action btn-db-danger" onclick="promptResetDatabase()">
+            🗑️ Reset / Clear Roster
+          </button>
+        </div>
+
+        <!-- Active Students Roster Table -->
+        <div class="db-section-title">
+          <h4>👥 Registered Students Roster</h4>
+        </div>
+        <div class="db-table-responsive">
+          <table class="db-table" id="dbStudentsTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Student Name</th>
+                <th>School / Institution</th>
+                <th>Current XP</th>
+                <th>Exams Taken</th>
+                <th>Highest Grade</th>
+                <th>Registered At</th>
+              </tr>
+            </thead>
+            <tbody id="dbStudentsTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Recent Exam Records Table -->
+        <div class="db-section-title" style="margin-top:1.5rem;">
+          <h4>📝 Recent Examination Results Log</h4>
+        </div>
+        <div class="db-table-responsive">
+          <table class="db-table" id="dbExamsTable">
+            <thead>
+              <tr>
+                <th>Record ID</th>
+                <th>Student</th>
+                <th>Exam Title</th>
+                <th>Score</th>
+                <th>Percentage</th>
+                <th>Grade</th>
+                <th>Date & Time</th>
+              </tr>
+            </thead>
+            <tbody id="dbExamsTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 

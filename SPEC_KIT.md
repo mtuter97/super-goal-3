@@ -3,8 +3,8 @@
 > **Course:** Super Goal 3 (Intermediate Third Grade – Term 1)  
 > **Authority:** Saudi Ministry of Education Curriculum Standards (McGraw-Hill)  
 > **Supervising Instructor:** Teacher Mahmoud Al-Saeed  
-> **Version:** 4.4 (Grand Term 1 Final Comprehensive Milestone Championship & Complete Units 1–4 Pedagogical Synthesis)  
-> **Last Updated:** November 2026 (Phase 4.4: Term 1 Grand Milestone Exam 22 covering Units 1 to 4 with 20 Diagnostic Questions + Unit 4 Lesson Preparation Architecture)
+> **Version:** 4.5 (Strict 0-XP Baseline, Mandatory Admission Gateway & Unified Student Database Engine)  
+> **Last Updated:** November 2026 (Phase 4.5: Mandatory Student Admission Modal for Name & School, Guaranteed 0-XP Start with No Unearned Bonuses, IndexedDB/Serverless Student Database Architecture with JSON/CSV Gradebook Export)
 
 ---
 
@@ -38,10 +38,11 @@ When extending or maintaining this project in any session, adhere strictly to th
    - Secondary Tech Accents: **Slate Charcoal** (`#2d3748`) and **Sky Blue** (`#0284c7`).
    - The Teacher Logo must remain prominently visible in the header (with a verified badge), footer, and as an elegant transparent background watermark on the official certificate.
    - Official Instructor Communication Channels (WhatsApp direct inquiry without raw digit display, YouTube channel, and LinkedIn profile) are accessible in the header, footer, and certificate preview modal.
-4. **Interactive Student Registration, Gamification & Star Student Ticker:**  
-   - **0-XP Baseline Start:** All students begin strictly at 0 XP (`sg3_student_xp`). Obsolete legacy session storage is automatically purged.
-   - **Real-time Name Registration Bonus:** Typing student name into the passport and registering grants an instant welcome bonus (+25 XP) and synchronizes with official certificates.
-   - **Comprehensive Exercise Progression:** XP points are systematically accumulated across all activities (Flashcards, Word Meaning Discovery, Grammar Diagnostics, Pronunciation Labs, Reading Stories & Questions, Writing Studio Evaluations, Discussion Arena, and 20 Final Exams).
+4. **Mandatory Student Admission, 0-XP Baseline & Unified Student Database Engine:**  
+   - **Mandatory Entry Registration:** On first visit, a non-dismissible Student Admission modal (`#mandatoryAdmissionModal`) requires students to enter their full English name and school before accessing the curriculum.
+   - **Strict 0-XP Baseline:** All students begin strictly at **0 XP** (`sg3_student_xp = 0`). No unearned registration or welcome bonuses are granted. Points can only be accumulated through verified educational achievement (flashcards, reading questions, grammar diagnostics, writing evaluations, and exams).
+   - **Unified Student Database Architecture (`SG3Database`):** Native IndexedDB (`SuperGoal3_StudentDB`) coupled with LocalStorage persistence and Vercel Serverless Functions (`/api/students` & `/api/records`).
+   - **Teacher/Supervisor Database Roster & Gradebook Export:** Direct header button `🗄️ Student Database` enables Teacher Mahmoud Al-Saeed to review the live student roster, view exam submission logs, and export full student data as `JSON` or Excel-ready `CSV`.
    - **Top Moving Star Student Honor Bar:** Prominently featured at the top of the app header, displaying the Star Student's name, current XP, and curriculum scope. Automatically traverses/passes across the screen once every 5 minutes (with an immediate introductory pass on launch, live countdown clock, and instant preview trigger).
    - Direct button `📜 Claim Certificate` allowing students to preview, generate, and print their official Certificate of Distinction.
 5. **Authentic Saudi Cultural Context in Every Section:**  

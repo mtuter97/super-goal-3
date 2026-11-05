@@ -18,12 +18,170 @@ document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('sg2_student_school')) localStorage.removeItem('sg2_student_school');
   } catch (e) {}
 
+
+  // ==========================================================================
+  // SG3 STUDENT DATABASE ENGINE (IndexedDB + LocalStorage Unified Architecture)
+  // ==========================================================================
+  const SG3Database = {
+    dbName: 'SuperGoal3_StudentDB',
+    dbVersion: 1,
+    db: null,
+
+    async init() {
+      return new Promise((resolve) => {
+        if (typeof window === 'undefined' || !window.indexedDB) {
+          resolve(null);
+          return;
+        }
+        try {
+          const req = indexedDB.open(this.dbName, this.dbVersion);
+          req.onupgradeneeded = (e) => {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains('students')) {
+              const studentStore = db.createObjectStore('students', { keyPath: 'id' });
+              studentStore.createIndex('name', 'name', { unique: false });
+            }
+            if (!db.objectStoreNames.contains('examRecords')) {
+              const recordStore = db.createObjectStore('examRecords', { keyPath: 'recordId' });
+              recordStore.createIndex('studentName', 'studentName', { unique: false });
+              recordStore.createIndex('examId', 'examId', { unique: false });
+            }
+          };
+          req.onsuccess = (e) => {
+            this.db = e.target.result;
+            resolve(this.db);
+          };
+          req.onerror = () => {
+            resolve(null);
+          };
+        } catch(err) {
+          resolve(null);
+        }
+      });
+    },
+
+    async registerStudent(name, school, startingXP = 0) {
+      const student = {
+        id: 'std_' + Date.now(),
+        name: String(name).trim(),
+        school: String(school).trim(),
+        xp: parseInt(startingXP, 10) || 0,
+        registeredAt: new Date().toISOString(),
+        lastActive: new Date().toISOString(),
+        examsCount: 0,
+        bestGrade: 'None'
+      };
+
+      try {
+        const roster = JSON.parse(localStorage.getItem('sg3_student_roster') || '[]');
+        const idx = roster.findIndex(s => s.name.toLowerCase() === student.name.toLowerCase());
+        if (idx >= 0) {
+          roster[idx].school = student.school;
+          roster[idx].xp = student.xp;
+          roster[idx].lastActive = new Date().toISOString();
+        } else {
+          roster.push(student);
+        }
+        localStorage.setItem('sg3_student_roster', JSON.stringify(roster));
+      } catch(e) {}
+
+      if (this.db) {
+        try {
+          const tx = this.db.transaction('students', 'readwrite');
+          tx.objectStore('students').put(student);
+        } catch(e) {}
+      }
+
+      try {
+        fetch('/api/students', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(student)
+        }).catch(() => {});
+      } catch(e) {}
+
+      return student;
+    },
+
+    async saveExamRecord(record) {
+      try {
+        const records = JSON.parse(localStorage.getItem('sg3_exam_records') || '[]');
+        records.unshift(record);
+        localStorage.setItem('sg3_exam_records', JSON.stringify(records));
+
+        const roster = JSON.parse(localStorage.getItem('sg3_student_roster') || '[]');
+        const s = roster.find(st => st.name.toLowerCase() === (record.studentName || '').toLowerCase());
+        if (s) {
+          s.examsCount = (s.examsCount || 0) + 1;
+          s.xp = parseInt(localStorage.getItem('sg3_student_xp') || '0', 10);
+          s.lastActive = new Date().toISOString();
+          if (record.percentage >= 80) s.bestGrade = record.grade;
+          localStorage.setItem('sg3_student_roster', JSON.stringify(roster));
+        }
+      } catch(e) {}
+
+      if (this.db) {
+        try {
+          const tx = this.db.transaction('examRecords', 'readwrite');
+          tx.objectStore('examRecords').put(record);
+        } catch(e) {}
+      }
+
+      try {
+        fetch('/api/records', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(record)
+        }).catch(() => {});
+      } catch(e) {}
+    },
+
+    async getAllStudents() {
+      try {
+        const roster = JSON.parse(localStorage.getItem('sg3_student_roster') || '[]');
+        if (roster && roster.length > 0) return roster;
+      } catch(e) {}
+
+      if (this.db) {
+        return new Promise((resolve) => {
+          try {
+            const tx = this.db.transaction('students', 'readonly');
+            const req = tx.objectStore('students').getAll();
+            req.onsuccess = () => resolve(req.result || []);
+            req.onerror = () => resolve([]);
+          } catch(e) { resolve([]); }
+        });
+      }
+      return [];
+    },
+
+    async getAllExamRecords() {
+      try {
+        const records = JSON.parse(localStorage.getItem('sg3_exam_records') || '[]');
+        if (records && records.length > 0) return records;
+      } catch(e) {}
+
+      if (this.db) {
+        return new Promise((resolve) => {
+          try {
+            const tx = this.db.transaction('examRecords', 'readonly');
+            const req = tx.objectStore('examRecords').getAll();
+            req.onsuccess = () => resolve(req.result || []);
+            req.onerror = () => resolve([]);
+          } catch(e) { resolve([]); }
+        });
+      }
+      return [];
+    }
+  };
+  SG3Database.init();
+
   // Application State
   const state = {
     currentTab: 'overview',
     studentName: localStorage.getItem('sg3_student_name') || '',
     studentSchool: localStorage.getItem('sg3_student_school') || '',
-    studentXP: parseInt(localStorage.getItem('sg3_student_xp') || '0', 10),
+    studentXP: (!localStorage.getItem('sg3_student_name') || !localStorage.getItem('sg3_student_school')) ? 0 : parseInt(localStorage.getItem('sg3_student_xp') || '0', 10),
     deepgramApiKey: localStorage.getItem('deepgram_api_key') || '',
     deepgramVoice: localStorage.getItem('deepgram_voice') || 'aura-asteria-en', // Natural American Voice
     speechRate: parseFloat(localStorage.getItem('preferred_speech_rate')) || 1.0,
@@ -395,30 +553,27 @@ document.addEventListener('DOMContentLoaded', () => {
       const enteredName = nameIn ? nameIn.value.trim() : '';
       const enteredSchool = schoolIn ? schoolIn.value.trim() : '';
 
-      if (!enteredName) {
-        alert('Please type your name in the input box to register your Student Identity and earn XP points!');
+      if (!enteredName || enteredName.length < 3) {
+        alert('Please enter your full English name (minimum 3 characters).');
         if (nameIn) nameIn.focus();
         return;
       }
 
+      if (!enteredSchool || enteredSchool.length < 3) {
+        alert('Please enter your school or educational institution (minimum 3 characters).');
+        if (schoolIn) schoolIn.focus();
+        return;
+      }
+
       state.studentName = enteredName;
+      state.studentSchool = enteredSchool;
       localStorage.setItem('sg3_student_name', state.studentName);
+      localStorage.setItem('sg3_student_school', state.studentSchool);
 
-      if (enteredSchool) {
-        state.studentSchool = enteredSchool;
-        localStorage.setItem('sg3_student_school', state.studentSchool);
-      }
+      // Register or update in database
+      SG3Database.registerStudent(state.studentName, state.studentSchool, state.studentXP);
 
-      // Award points for writing/registering name!
-      const hasBonus = localStorage.getItem('sg3_reg_bonus');
-      if (!hasBonus) {
-        addXP(25);
-        localStorage.setItem('sg3_reg_bonus', 'true');
-        alert(`🎉 Student identity successfully registered for: ${state.studentName}!\n\n⭐ +25 XP awarded as Welcome & Registration Bonus!\nYour name is now featured on the top Star Student Ticker.`);
-      } else {
-        addXP(5);
-        alert(`Student identity updated for: ${state.studentName}!\nOfficial certificates and Star Student Ticker have been synchronized.`);
-      }
+      alert(`Student identity successfully updated for: ${state.studentName} (${state.studentSchool})!\nOfficial certificates, database roster, and Star Student Ticker have been synchronized.`);
 
       syncStudentPassport();
       launchTickerPass();
@@ -2854,6 +3009,20 @@ document.addEventListener('DOMContentLoaded', () => {
     addXP(score * 10);
     playSound('correct');
 
+    // Archive exam result into Student Database
+    SG3Database.saveExamRecord({
+      recordId: 'rec_' + Date.now(),
+      studentName: state.studentName,
+      studentSchool: state.studentSchool,
+      examId: ex.id,
+      examTitle: ex.title,
+      score: score,
+      total: totalQ,
+      percentage: pct,
+      grade: gradeLetter,
+      completedAt: new Date().toISOString()
+    });
+
     const runner = document.getElementById('exam-runner-container');
     if (!runner) return;
 
@@ -3068,6 +3237,233 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(overlay);
     playSound('correct');
   }
+
+  // Check Mandatory Admission Gateway (Student Name and School are Mandatory)
+  function checkMandatoryAdmission() {
+    const modal = document.getElementById('mandatoryAdmissionModal');
+    const isRegistered = state.studentName && state.studentName.trim().length >= 3 &&
+                         state.studentSchool && state.studentSchool.trim().length >= 3;
+    if (!isRegistered) {
+      state.studentXP = 0;
+      localStorage.setItem('sg3_student_xp', '0');
+      if (modal) {
+        modal.style.display = 'flex';
+        const nameInput = document.getElementById('admissionFullName');
+        if (nameInput) setTimeout(() => nameInput.focus(), 250);
+      }
+    } else {
+      if (modal) modal.style.display = 'none';
+      // Register existing student in database
+      SG3Database.registerStudent(state.studentName, state.studentSchool, state.studentXP);
+    }
+  }
+
+  window.handleMandatoryAdmission = function(e) {
+    if (e) e.preventDefault();
+    const nameInput = document.getElementById('admissionFullName');
+    const schoolInput = document.getElementById('admissionSchoolName');
+    const alertBox = document.getElementById('admissionErrorAlert');
+    const nameVal = nameInput ? nameInput.value.trim() : '';
+    const schoolVal = schoolInput ? schoolInput.value.trim() : '';
+
+    if (!nameVal || nameVal.length < 3) {
+      if (alertBox) {
+        alertBox.style.display = 'block';
+        alertBox.textContent = 'Please enter your full English name (minimum 3 characters).';
+      }
+      if (nameInput) nameInput.focus();
+      return;
+    }
+
+    if (!schoolVal || schoolVal.length < 3) {
+      if (alertBox) {
+        alertBox.style.display = 'block';
+        alertBox.textContent = 'Please enter your school or educational institution name (minimum 3 characters).';
+      }
+      if (schoolInput) schoolInput.focus();
+      return;
+    }
+
+    if (alertBox) alertBox.style.display = 'none';
+
+    // Set state strictly starting at 0 XP
+    state.studentName = nameVal;
+    state.studentSchool = schoolVal;
+    state.studentXP = 0;
+
+    localStorage.setItem('sg3_student_name', state.studentName);
+    localStorage.setItem('sg3_student_school', state.studentSchool);
+    localStorage.setItem('sg3_student_xp', '0');
+    localStorage.removeItem('sg3_reg_bonus');
+
+    // Register in Database
+    SG3Database.registerStudent(state.studentName, state.studentSchool, 0);
+
+    // Hide Modal
+    const modal = document.getElementById('mandatoryAdmissionModal');
+    if (modal) modal.style.display = 'none';
+
+    syncStudentPassport();
+    updateTickerContent();
+    launchTickerPass();
+    playSound('correct');
+
+    alert(`🎉 Admission Confirmed!\n\nCandidate: ${state.studentName}\nSchool: ${state.studentSchool}\nStarting Score: 0 XP\n\nWelcome to Super Goal 3! Start exploring the units, practice activities, and take exams to earn academic honors.`);
+  };
+
+  // Database Modal Controls
+  window.openStudentDbModal = async function() {
+    const modal = document.getElementById('studentDbModal');
+    if (!modal) return;
+
+    const students = await SG3Database.getAllStudents();
+    const records = await SG3Database.getAllExamRecords();
+
+    // Stats calculations
+    const totalStudentsElem = document.getElementById('dbTotalStudents');
+    const totalExamsElem = document.getElementById('dbTotalExams');
+    const topXPElem = document.getElementById('dbTopXP');
+    const avgScoreElem = document.getElementById('dbAvgScore');
+
+    if (totalStudentsElem) totalStudentsElem.textContent = students.length.toString();
+    if (totalExamsElem) totalExamsElem.textContent = records.length.toString();
+
+    let maxXP = state.studentXP;
+    students.forEach(s => { if (s.xp > maxXP) maxXP = s.xp; });
+    if (topXPElem) topXPElem.textContent = `${maxXP} XP`;
+
+    let totalPct = 0;
+    records.forEach(r => { totalPct += (r.percentage || 0); });
+    const avgPct = records.length > 0 ? Math.round(totalPct / records.length) : 0;
+    if (avgScoreElem) avgScoreElem.textContent = `${avgPct}%`;
+
+    // Populate Students Table
+    const studentsTbody = document.getElementById('dbStudentsTableBody');
+    if (studentsTbody) {
+      if (students.length === 0) {
+        studentsTbody.innerHTML = '<tr><td colspan="7" class="db-empty-cell">No students registered in the database yet.</td></tr>';
+      } else {
+        studentsTbody.innerHTML = students.map((s, idx) => `
+          <tr>
+            <td><strong>#${idx + 1}</strong></td>
+            <td><strong>${s.name}</strong></td>
+            <td>${s.school || 'N/A'}</td>
+            <td><span style="color:var(--saudi-green); font-weight:800;">${s.xp || 0} XP</span></td>
+            <td>${s.examsCount || 0}</td>
+            <td><span class="badge-diff intermediate">${s.bestGrade || 'In Progress'}</span></td>
+            <td>${s.registeredAt ? new Date(s.registeredAt).toLocaleDateString() : 'Active'}</td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    // Populate Exams Table
+    const examsTbody = document.getElementById('dbExamsTableBody');
+    if (examsTbody) {
+      if (records.length === 0) {
+        examsTbody.innerHTML = '<tr><td colspan="7" class="db-empty-cell">No exam submissions recorded yet.</td></tr>';
+      } else {
+        examsTbody.innerHTML = records.slice(0, 50).map(r => `
+          <tr>
+            <td><code>${r.recordId}</code></td>
+            <td><strong>${r.studentName}</strong></td>
+            <td>${r.examTitle}</td>
+            <td><strong>${r.score}</strong> / ${r.total}</td>
+            <td><strong>${r.percentage}%</strong></td>
+            <td><span class="badge-diff ${r.percentage >= 80 ? 'foundation' : 'intermediate'}">${r.grade}</span></td>
+            <td>${new Date(r.completedAt || Date.now()).toLocaleString()}</td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    modal.style.display = 'flex';
+  };
+
+  window.closeStudentDbModal = function() {
+    const modal = document.getElementById('studentDbModal');
+    if (modal) modal.style.display = 'none';
+  };
+
+  window.exportDatabaseJSON = async function() {
+    const students = await SG3Database.getAllStudents();
+    const records = await SG3Database.getAllExamRecords();
+    const dbExport = {
+      platform: 'Super Goal 3 Master Interactive Learning Platform',
+      supervisor: 'Teacher Mahmoud Al-Saeed',
+      exportedAt: new Date().toISOString(),
+      studentsCount: students.length,
+      examRecordsCount: records.length,
+      studentsRoster: students,
+      examinationRecords: records
+    };
+
+    const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(dbExport, null, 2));
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute('href', dataStr);
+    downloadAnchor.setAttribute('download', `super_goal_3_students_database_${Date.now()}.json`);
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+  };
+
+  window.exportRecordsCSV = async function() {
+    const records = await SG3Database.getAllExamRecords();
+    if (records.length === 0) {
+      alert('No exam records to export yet. Complete an exam first!');
+      return;
+    }
+
+    let csvContent = 'RecordID,StudentName,School,ExamID,ExamTitle,Score,Total,Percentage,Grade,CompletedAt\n';
+    records.forEach(r => {
+      const row = [
+        `"${r.recordId}"`,
+        `"${r.studentName.replace(/"/g, '""')}"`,
+        `"${(r.school || '').replace(/"/g, '""')}"`,
+        `"${r.examId}"`,
+        `"${r.examTitle.replace(/"/g, '""')}"`,
+        r.score,
+        r.total,
+        r.percentage,
+        `"${r.grade}"`,
+        `"${r.completedAt}"`
+      ];
+      csvContent += row.join(',') + '\n';
+    });
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute('href', url);
+    downloadAnchor.setAttribute('download', `super_goal_3_exam_records_${Date.now()}.csv`);
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+  };
+
+  window.promptResetDatabase = function() {
+    const confirmReset = confirm('Are you sure you want to reset the student database roster and exam records? This cannot be undone.');
+    if (!confirmReset) return;
+
+    try {
+      localStorage.removeItem('sg3_student_roster');
+      localStorage.removeItem('sg3_exam_records');
+      localStorage.removeItem('sg3_student_name');
+      localStorage.removeItem('sg3_student_school');
+      localStorage.setItem('sg3_student_xp', '0');
+      state.studentName = '';
+      state.studentSchool = '';
+      state.studentXP = 0;
+      closeStudentDbModal();
+      checkMandatoryAdmission();
+      syncStudentPassport();
+      updateTickerContent();
+      alert('Student database successfully reset. Mandatory admission gateway initialized at 0 XP.');
+    } catch(e) {
+      console.error(e);
+    }
+  };
+
   window.showCertificateModal = showCertificateModal;
 
   window.closeCertModal = function() {
@@ -3086,6 +3482,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderWritingStudio();
   renderDiscussionArena();
   renderExamSuite();
+  checkMandatoryAdmission();
 
   console.log('Super Goal 3 Master Interactive Platform initialized successfully.');
 });
