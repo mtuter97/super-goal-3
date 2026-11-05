@@ -10284,6 +10284,276 @@ window.APP_DATA = {
           "explanation": "Option A is syntactically, lexically, and grammatically flawless, demonstrating elevated academic expression and perfect pronoun agreement."
         }
       ]
+    },
+    {
+        "id": "exam_21",
+        "title": "Exam 21: Super Goal 3 Tri-Unit Milestone Benchmark Exam (Units 1, 2 & 3)",
+        "unit": "1-3",
+        "difficulty": "Advanced",
+        "durationMinutes": 25,
+        "description": "Comprehensive cross-thematic milestone examination synthesizing Lifestyles (Unit 1), Life Stories (Unit 2), and When Are You Traveling? (Unit 3). Evaluates frequency adverbs, past inflections, used to, future forms, infinitives of purpose, airport operations, and authentic Saudi cultural contexts.",
+        "questions": [
+            {
+                "id": "e21_q01",
+                "visualClue": "🏃 Healthy Habits & Frequency",
+                "question": "Khalid is dedicated to physical fitness and Saudi sports club activities. Which sentence demonstrates the correct placement of the frequency adverb \"always\"?",
+                "options": [
+                    "Khalid always exercises at the fitness center before Maghrib prayer.",
+                    "Khalid exercises always at the fitness center before Maghrib prayer.",
+                    "Always Khalid exercises at the fitness center before Maghrib prayer.",
+                    "Khalid exercises at the fitness center always before Maghrib prayer."
+                ],
+                "correctAnswer": 0,
+                "explanation": "Frequency adverbs such as \"always\", \"usually\", and \"never\" normally precede the main verb (\"always exercises\") and follow the auxiliary/be verb. Option A is syntactically flawless."
+            },
+            {
+                "id": "e21_q02",
+                "visualClue": "📱 Screen Time vs. Study Routine",
+                "question": "Fahd usually ________ his homework after Asr, but right now he ________ a live coding tutorial on his tablet.",
+                "options": [
+                    "is finishing / watches",
+                    "finishes / is watching",
+                    "finish / watches",
+                    "finishes / watching"
+                ],
+                "correctAnswer": 1,
+                "explanation": "The habitual marker \"usually\" requires Simple Present (\"finishes\" for third-person singular Fahd), whereas the temporal marker \"right now\" requires Present Progressive (\"is watching\"). Option B is correct."
+            },
+            {
+                "id": "e21_q03",
+                "visualClue": "🥗 Nutritional Habits",
+                "question": "Doctor: \"________ do you eat fresh vegetables and fruits?\" — Student: \"I eat them twice a day to maintain optimal vitality.\"",
+                "options": [
+                    "How long",
+                    "How much",
+                    "How often",
+                    "How many"
+                ],
+                "correctAnswer": 2,
+                "explanation": "\"How often\" inquires about the frequency of an action. The response (\"twice a day\") specifies frequency, making Option C the only accurate interrogative phrase."
+            },
+            {
+                "id": "e21_q04",
+                "visualClue": "🎾 Sports & Pastimes",
+                "question": "Both Tariq and Rakan enjoy athletics. ________ of them dislikes participating in community sports leagues.",
+                "options": [
+                    "All",
+                    "Both",
+                    "Neither",
+                    "None"
+                ],
+                "correctAnswer": 2,
+                "explanation": "\"Neither\" is used when referring to two individuals in a negative sense with a singular verb (\"Neither of them dislikes...\"). \"None\" is used for groups of three or more."
+            },
+            {
+                "id": "e21_q05",
+                "visualClue": "🧘 Balanced Lifestyle",
+                "question": "A person who prefers spending leisure time exercising outdoors rather than watching television all weekend is the direct opposite of a ________.",
+                "options": [
+                    "fitness fanatic",
+                    "devoted employee",
+                    "vegetarian",
+                    "couch potato"
+                ],
+                "correctAnswer": 3,
+                "explanation": "A \"couch potato\" is an idiomatic term for an inactive person who spends excessive time sitting or watching television. Active athletic individuals represent the direct opposite."
+            },
+            {
+                "id": "e21_q06",
+                "visualClue": "🎨 Creative Pastimes",
+                "question": "Noura spends six hours every Saturday painting landscapes. She is completely ________ fine arts and digital illustration.",
+                "options": [
+                    "turned up to",
+                    "out of",
+                    "into",
+                    "used to"
+                ],
+                "correctAnswer": 2,
+                "explanation": "The idiomatic expression \"to be into something\" means to be deeply interested, enthusiastic, and passionate about an activity."
+            },
+            {
+                "id": "e21_q07",
+                "visualClue": "📜 Historical Heritage",
+                "question": "In 1932, King Abdulaziz ________ the Kingdom of Saudi Arabia and ________ the foundation for enduring peace and prosperity.",
+                "options": [
+                    "unifies / lay",
+                    "unify / layed",
+                    "was unifying / lied",
+                    "unified / laid"
+                ],
+                "correctAnswer": 3,
+                "explanation": "Past historical events require the Simple Past tense. \"Unified\" is the regular past of unify, and \"laid\" is the irregular past form of lay (lay - laid - laid)."
+            },
+            {
+                "id": "e21_q08",
+                "visualClue": "👑 Royal Biography",
+                "question": "The Custodian of the Two Holy Mosques King Salman bin Abdulaziz ________ in Riyadh in 1935 and ________ at the Princes' School.",
+                "options": [
+                    "is born / was educated",
+                    "was born / was educated",
+                    "were born / educated",
+                    "born / was educating"
+                ],
+                "correctAnswer": 1,
+                "explanation": "Biographical origins take the passive formula \"was/were born\". Because King Salman is singular, \"was born\" and \"was educated\" are grammatically accurate."
+            },
+            {
+                "id": "e21_q09",
+                "visualClue": "🏙️ Urban Transformation",
+                "question": "Riyadh ________ a small walled desert town, but today it is a gleaming global metropolis with modern towers and transit.",
+                "options": [
+                    "uses to be",
+                    "is used to",
+                    "used to be",
+                    "didn't use to"
+                ],
+                "correctAnswer": 2,
+                "explanation": "\"Used to + base verb\" describes a past state or habit that was true in the past but no longer exists today. \"Used to be\" perfectly highlights this contrast."
+            },
+            {
+                "id": "e21_q10",
+                "visualClue": "⚽ Childhood Memories",
+                "question": "Student A: \"________ football in the neighborhood after school when you were younger?\" — Student B: \"Yes, we played every afternoon!\"",
+                "options": [
+                    "Did you use to play",
+                    "Did you used to play",
+                    "Were you use to play",
+                    "Do you used to play"
+                ],
+                "correctAnswer": 0,
+                "explanation": "In past questions formed with the auxiliary \"Did\", the main verb must revert to its base form: \"Did you use to play\" (not \"used to\")."
+            },
+            {
+                "id": "e21_q11",
+                "visualClue": "🚀 Space Exploration Heritage",
+                "question": "When HRH Prince Sultan bin Salman ________ aboard the Space Shuttle Discovery in 1985, he ________ the first Arab Muslim astronaut in history.",
+                "options": [
+                    "flies / becomes",
+                    "was flying / become",
+                    "flown / had become",
+                    "flew / became"
+                ],
+                "correctAnswer": 3,
+                "explanation": "When linking two completed past actions in a chronological narrative with \"when\", both clauses employ the Simple Past: \"flew\" (fly) and \"became\" (become)."
+            },
+            {
+                "id": "e21_q12",
+                "visualClue": "🩸 Humanitarian Service",
+                "question": "Trent Olsen received an honorary award from his community after completing his 100th voluntary blood ________.",
+                "options": [
+                    "appointment",
+                    "donation",
+                    "operation",
+                    "facility"
+                ],
+                "correctAnswer": 1,
+                "explanation": "A voluntary contribution of blood or resources to help save human lives is called a \"donation\". Hence, \"blood donation\" is the precise lexical term."
+            },
+            {
+                "id": "e21_q13",
+                "visualClue": "🏆 Sports Achievement",
+                "question": "Ahmed Jamal got his ________ when the national coach saw him score the winning goal during the regional school championship.",
+                "options": [
+                    "big break",
+                    "out of touch",
+                    "litter",
+                    "attitude"
+                ],
+                "correctAnswer": 0,
+                "explanation": "The idiomatic term \"big break\" refers to a sudden significant opportunity or lucky chance that leads to success or advancement in one's career."
+            },
+            {
+                "id": "e21_q14",
+                "visualClue": "✈️ Confirmed Flight Schedule",
+                "question": "Mr. Al-Ghamdi has already purchased his ticket and reserved his hotel room. He ________ to Dubai tomorrow evening on Saudia flight SV 520.",
+                "options": [
+                    "fly",
+                    "flew",
+                    "going to flying",
+                    "is flying"
+                ],
+                "correctAnswer": 3,
+                "explanation": "The Present Progressive (\"is flying\") is the preferred structure for definite, scheduled personal arrangements where prior commitments (tickets and hotel bookings) have already been made."
+            },
+            {
+                "id": "e21_q15",
+                "visualClue": "🌦️ Meteorological Signs",
+                "question": "Look at those dense, dark clouds rolling over the mountains of Abha! It ________ heavily this afternoon.",
+                "options": [
+                    "is going to rain",
+                    "rained",
+                    "will raining",
+                    "rains"
+                ],
+                "correctAnswer": 0,
+                "explanation": "\"Be going to\" is employed when making predictions based on present observable physical evidence (\"look at those dense dark clouds\"). Option A is accurate."
+            },
+            {
+                "id": "e21_q16",
+                "visualClue": "🧳 Helpful Airport Assistance",
+                "question": "Traveler: \"My luggage is very heavy and I cannot carry both bags!\" — Friendly Passenger: \"Don't worry, I ________ you with the trolley right now.\"",
+                "options": [
+                    "am going to help",
+                    "helped",
+                    "will help",
+                    "am helping"
+                ],
+                "correctAnswer": 2,
+                "explanation": "\"Will + base verb\" is used for spontaneous, on-the-spot decisions, offers of assistance, and promises made at the exact instant of speaking. Option C is correct."
+            },
+            {
+                "id": "e21_q17",
+                "visualClue": "🎯 Purpose & Excursion",
+                "question": "International exchange scholars traveled to the historic oasis of Al-Ula ________ the ancient Nabataean architectural tombs at Hegra.",
+                "options": [
+                    "for explore",
+                    "to explore",
+                    "exploring",
+                    "so that explore"
+                ],
+                "correctAnswer": 1,
+                "explanation": "An infinitive of purpose (\"to + base verb\") expresses the objective or reason behind an action. \"To explore\" correctly answers the question \"Why did they travel?\"."
+            },
+            {
+                "id": "e21_q18",
+                "visualClue": "⏰ Future Time Clause Syntax",
+                "question": "As soon as our plane ________ at King Abdulaziz International Airport in Jeddah, we will take the high-speed Haramain Railway to Makkah.",
+                "options": [
+                    "will land",
+                    "landed",
+                    "is landing",
+                    "lands"
+                ],
+                "correctAnswer": 3,
+                "explanation": "In future time clauses introduced by conjunctions such as \"as soon as\", \"when\", \"before\", and \"after\", the verb in the dependent time clause must be in the Simple Present tense (\"lands\"), while the main clause uses future (\"will take\")."
+            },
+            {
+                "id": "e21_q19",
+                "visualClue": "🛂 Airport Navigation",
+                "question": "Passengers walked quickly ________ passport control and customs before heading ________ Gate 14 to board their flight.",
+                "options": [
+                    "through / towards",
+                    "onto / off",
+                    "out / into of",
+                    "down / under"
+                ],
+                "correctAnswer": 0,
+                "explanation": "\"Through\" signifies moving in one side and out the other side of an enclosed area (customs/security), and \"towards\" denotes movement in the direction of a specific location (Gate 14)."
+            },
+            {
+                "id": "e21_q20",
+                "visualClue": "🎫 Boarding & Flight Operations",
+                "question": "Before proceeding through security, every traveler must present a valid passport and an official ________ issued by the airline.",
+                "options": [
+                    "baggage claim",
+                    "layover",
+                    "boarding pass",
+                    "runway"
+                ],
+                "correctAnswer": 2,
+                "explanation": "A \"boarding pass\" is the official document issued upon check-in that grants a passenger permission to board an airplane and specifies their seat and gate."
+            }
+        ]
     }
   ],
   "readingGlossary": {

@@ -2444,6 +2444,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const curExamFilter = state.examFilter || 'all';
     const examsToRender = DATA.exams.filter(ex => {
+      if (curExamFilter === 'tri') return ex.unit === '1-3' || ex.id === 'exam_21';
       if (curExamFilter === 'u1') return ex.unit === 1;
       if (curExamFilter === 'u2') return ex.unit === 2;
       if (curExamFilter === 'u3') return ex.unit === 3;
@@ -2846,7 +2847,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gradeLetter = 'D (Pass)';
       feedbackSummary = 'Teacher Mahmoud Al-Saeed acknowledges your passing mark. Reinforce your foundation using Practice Mode to climb to higher honors!';
     } else {
-      feedbackSummary = 'Teacher Mahmoud Al-Saeed encourages you to revisit Unit 1: Lifestyles in Practice Mode and retake the exam to achieve mastery!';
+      feedbackSummary = 'Teacher Mahmoud Al-Saeed encourages you to revisit the corresponding unit modules in Practice Mode and retake the exam to achieve mastery!';
     }
 
     addXP(score * 10);

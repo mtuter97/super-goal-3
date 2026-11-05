@@ -3,8 +3,8 @@
 > **Course:** Super Goal 3 (Intermediate Third Grade – Term 1)  
 > **Authority:** Saudi Ministry of Education Curriculum Standards (McGraw-Hill)  
 > **Supervising Instructor:** Teacher Mahmoud Al-Saeed  
-> **Version:** 4.2 (Zero-Start Gamification Score Engine + Top Moving Star Student Honor Ticker System)  
-> **Last Updated:** November 2026 (Phase 4.2: 0-XP Baseline Initialization, Real-time Student Identity Registration Bonus & 5-Minute Recurring Top Honor Ticker)
+> **Version:** 4.3 (Tri-Unit Milestone Benchmark Championship & Comprehensive Unit 3 Pedagogical Preparation)  
+> **Last Updated:** November 2026 (Phase 4.3: Tri-Unit Milestone Exam 21 covering Units 1, 2 & 3 with 20 Diagnostic Questions + Lesson Preparation Architecture)
 
 ---
 
@@ -72,7 +72,7 @@ When extending or maintaining this project in any session, adhere strictly to th
 | **High-Resolution Images** | 40+ authentic textbook images in `assets/images` | ✅ Extracted from SG3 book and cultural archives |
 | **Writing Master Tasks** | 4 comprehensive studio tasks | ✅ Youth habits + Biography + Travel Itinerary + Culinary Recipe with live word counters & keyword evaluators |
 | **Discussion Scenarios** | 12 communicative role-plays | ✅ Gym, smartphone, diet, used to, blood drive, Falcons, airport, study tour, concierge, grocery store, Kabsa home cooking, healthy dining |
-| **Tiered Examinations** | 20 exams (20 Qs each = 400 questions) | ✅ 400 questions with visual clues & comprehensive explanations |
+| **Tiered Examinations** | 21 exams (20 single-unit + 1 Tri-Unit Milestone Benchmark Exam = 420 questions) | ✅ 420 questions with visual clues & comprehensive explanations |
 | **Arabic Characters in Web Code** | **0** | ✅ Verified 100% Target Language Immersion |
 
 ---
@@ -175,6 +175,7 @@ c:\Users\elsae\Desktop\grade 3 super goal\
   - Scenario 8: Planning an Educational Tour across the Kingdom (Nawaf & International Student Lucas).
   - Scenario 9: Hotel Concierge & Travel Inquiries (Dr. Robert & Concierge Mr. Zaid).
 - **Exams 11 to 15:** 100 multiple-choice questions with visual clues and detailed pedagogical explanations.
+- **Tri-Unit Milestone Benchmark Exam (Exam 21):** Comprehensive 20-question milestone championship synthesizing Units 1, 2, and 3 (Lifestyles, Life Stories, and When Are You Traveling?) with diagnostic syntax, frequency habits, past inflections, habitual 'used to', future forms ('will' vs 'be going to' vs Present Progressive), infinitives of purpose, airport navigation, and authentic Saudi contexts. Accessible via the dedicated `Units 1–3 Milestone (Exam 21)` filter.
 
 ---
 
