@@ -10554,6 +10554,276 @@ window.APP_DATA = {
                 "explanation": "A \"boarding pass\" is the official document issued upon check-in that grants a passenger permission to board an airplane and specifies their seat and gate."
             }
         ]
+    },
+    {
+        "id": "exam_22",
+        "title": "Exam 22: Super Goal 3 Grand Term 1 Comprehensive Championship (Units 1–4)",
+        "unit": "1-4",
+        "difficulty": "Advanced",
+        "durationMinutes": 30,
+        "description": "Grand final term milestone examination comprehensively evaluating all four units of Term 1: Lifestyles (Unit 1), Life Stories (Unit 2), When Are You Traveling? (Unit 3), and What Do I Need to Buy? (Unit 4). Assesses frequency adverbs, past inflections, used to, future forms, purpose infinitives, count/non-count nouns, partitives, reflexives, cause/result connectors, and authentic Saudi cultural heritage.",
+        "questions": [
+            {
+                "id": "e22_q01",
+                "visualClue": "🏃 Lifestyles & Routine",
+                "question": "Tariq is dedicated to punctuality and academic excellence. Which sentence demonstrates the correct placement of the frequency adverb \"always\" with the verb \"to be\"?",
+                "options": [
+                    "Tariq is always punctual for his morning lectures at the academy.",
+                    "Tariq always is punctual for his morning lectures at the academy.",
+                    "Tariq is punctual always for his morning lectures at the academy.",
+                    "Always Tariq is punctual for his morning lectures at the academy."
+                ],
+                "correctAnswer": 0,
+                "explanation": "Frequency adverbs like \"always\" follow the verb \"to be\" (\"is always\") and precede regular action verbs. Option A is grammatically flawless."
+            },
+            {
+                "id": "e22_q02",
+                "visualClue": "💻 Digital Habits vs. Study Routine",
+                "question": "John usually ________ a computer for his graphic design homework, but this afternoon he ________ a traditional textbook in the library.",
+                "options": [
+                    "is using / studies",
+                    "uses / is studying",
+                    "use / study",
+                    "using / is studies"
+                ],
+                "correctAnswer": 1,
+                "explanation": "The routine marker \"usually\" takes the Simple Present (\"uses\"), while the temporary marker \"this afternoon\" takes the Present Progressive (\"is studying\"). Option B is correct."
+            },
+            {
+                "id": "e22_q03",
+                "visualClue": "🥗 Nutritional Habits",
+                "question": "Nutritionist: \"________ do you drink herbal tea or fresh fruit juice?\" — Refaa: \"I drink herbal tea every morning after breakfast.\"",
+                "options": [
+                    "How long",
+                    "How many",
+                    "How often",
+                    "How much"
+                ],
+                "correctAnswer": 2,
+                "explanation": "\"How often\" is the interrogative phrase used to inquire about the frequency of an action or habit. Option C is the accurate interrogative."
+            },
+            {
+                "id": "e22_q04",
+                "visualClue": "🏋️ Athletic Pastimes",
+                "question": "Between running and swimming, Arthur likes both outdoor sports. ________ of them feels boring or unchallenging to him.",
+                "options": [
+                    "All",
+                    "None",
+                    "Both",
+                    "Neither"
+                ],
+                "correctAnswer": 3,
+                "explanation": "\"Neither\" is used when referring to two alternatives in a negative sense with a singular verb (\"Neither of them feels...\"). Option D is correct."
+            },
+            {
+                "id": "e22_q05",
+                "visualClue": "🎨 Creative Pastimes",
+                "question": "Noura spends several hours every weekend creating digital portraits. She is genuinely ________ contemporary graphic arts.",
+                "options": [
+                    "out of",
+                    "turned up",
+                    "over with",
+                    "into"
+                ],
+                "correctAnswer": 3,
+                "explanation": "The idiom \"to be into something\" means to be deeply enthusiastic, interested, and actively engaged in an activity. Option D is correct."
+            },
+            {
+                "id": "e22_q06",
+                "visualClue": "📜 Saudi Historic Milestones",
+                "question": "King Abdulaziz ________ the diverse regions in 1932 and ________ the foundation for a unified and modern nation.",
+                "options": [
+                    "unifies / established",
+                    "unified / established",
+                    "was unifying / establish",
+                    "unify / establishes"
+                ],
+                "correctAnswer": 1,
+                "explanation": "Past historical events with a specific past year (\"in 1932\") require Simple Past forms (\"unified\" and \"established\"). Option B is correct."
+            },
+            {
+                "id": "e22_q07",
+                "visualClue": "👑 Royal Heritage",
+                "question": "The Custodian of the Two Holy Mosques King Salman bin Abdulaziz ________ in Riyadh and ________ with high academic distinction.",
+                "options": [
+                    "is born / was raised",
+                    "were born / raised",
+                    "was born / was raised",
+                    "born / is raised"
+                ],
+                "correctAnswer": 2,
+                "explanation": "Biographical descriptions employ the passive formula \"was/were born\" and \"was/were raised\". For a singular subject, \"was born\" and \"was raised\" are required."
+            },
+            {
+                "id": "e22_q08",
+                "visualClue": "🏙️ Urban Transformation",
+                "question": "Decades ago, Riyadh ________ a quiet settlement enclosed by adobe walls, but today it is a dazzling world metropolis.",
+                "options": [
+                    "used to be",
+                    "uses to be",
+                    "is used to",
+                    "didn't use to"
+                ],
+                "correctAnswer": 0,
+                "explanation": "\"Used to + base verb\" signifies a past state that existed for an extended period but is no longer true today. Option A is accurate."
+            },
+            {
+                "id": "e22_q09",
+                "visualClue": "❓ Past Interrogative Syntax",
+                "question": "Grandfather: \"________ in an adobe house when you were a child in old Diriyah?\" — Omar: \"Yes, our family lived there for twenty years.\"",
+                "options": [
+                    "Did you used to live",
+                    "Were you use to live",
+                    "Did you use to live",
+                    "Do you used to live"
+                ],
+                "correctAnswer": 2,
+                "explanation": "When forming questions in the past with the auxiliary \"Did\", the verb must be in its base form: \"Did you use to live\" (not \"used to\"). Option C is correct."
+            },
+            {
+                "id": "e22_q10",
+                "visualClue": "🚀 Historic Space Mission",
+                "question": "When HRH Prince Sultan bin Salman ________ aboard the Space Shuttle Discovery in 1985, he ________ international scientific history.",
+                "options": [
+                    "flew / made",
+                    "flies / makes",
+                    "was flying / make",
+                    "flown / had made"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Two sequential completed actions in the past linked by \"when\" both use the Simple Past: \"flew\" (fly) and \"made\" (make). Option A is correct."
+            },
+            {
+                "id": "e22_q11",
+                "visualClue": "✈️ Confirmed Flight Schedule",
+                "question": "Engineer Badr has already collected his electronic boarding pass and confirmed his seat. He ________ to Tokyo tomorrow at 7:30 AM.",
+                "options": [
+                    "fly",
+                    "flew",
+                    "will to fly",
+                    "is flying"
+                ],
+                "correctAnswer": 3,
+                "explanation": "The Present Progressive (\"is flying\") indicates a confirmed future arrangement where tickets and official bookings have already been made. Option D is correct."
+            },
+            {
+                "id": "e22_q12",
+                "visualClue": "🔭 Future Predictions",
+                "question": "Observe the heavy storm clouds darkening the sky over Taif! It ________ pour with rain within minutes.",
+                "options": [
+                    "is going to",
+                    "will to",
+                    "is raining",
+                    "rained"
+                ],
+                "correctAnswer": 0,
+                "explanation": "\"Be going to\" is employed when an event in the near future is predicted based on visible, observable present signs (\"observe the heavy storm clouds\"). Option A is accurate."
+            },
+            {
+                "id": "e22_q13",
+                "visualClue": "🎯 Purpose & Excursions",
+                "question": "International language students traveled across the Kingdom ________ Modern Standard Arabic and experience authentic Saudi culture.",
+                "options": [
+                    "for studying",
+                    "to study",
+                    "study",
+                    "so that study"
+                ],
+                "correctAnswer": 1,
+                "explanation": "An infinitive of purpose (\"to + base verb\") expresses the underlying motivation or purpose of an action. Option B is correct."
+            },
+            {
+                "id": "e22_q14",
+                "visualClue": "⏱️ Future Time Clauses",
+                "question": "When our high-speed Haramain train ________ in Madinah, we will check in directly at the central hotel.",
+                "options": [
+                    "will arrive",
+                    "arrived",
+                    "arrives",
+                    "is arriving"
+                ],
+                "correctAnswer": 2,
+                "explanation": "In future time clauses beginning with conjunctions like \"when\", \"as soon as\", or \"before\", the verb in the dependent clause must be in the Simple Present (\"arrives\"). Option C is correct."
+            },
+            {
+                "id": "e22_q15",
+                "visualClue": "🛂 Airport Concourse Navigation",
+                "question": "After landing, the passengers walked smoothly ________ the automated e-gates and headed ________ the baggage claim carousels.",
+                "options": [
+                    "onto / down",
+                    "out of / under",
+                    "through / towards",
+                    "off / into of"
+                ],
+                "correctAnswer": 2,
+                "explanation": "\"Through\" indicates passage within a bounded checkpoint or corridor, and \"towards\" expresses direction towards a destination. Option C is correct."
+            },
+            {
+                "id": "e22_q16",
+                "visualClue": "🍚 Count vs. Non-Count Pantry Staples",
+                "question": "The recipe only calls for ________ salt and ________ cloves of fresh garlic to season the tender lamb chops.",
+                "options": [
+                    "a few / many",
+                    "a little / a few",
+                    "many / much",
+                    "a lot / little"
+                ],
+                "correctAnswer": 1,
+                "explanation": "\"Salt\" is an uncountable noun requiring \"a little\", whereas \"cloves\" is a plural countable noun requiring \"a few\". Option B is correct."
+            },
+            {
+                "id": "e22_q17",
+                "visualClue": "🥫 Culinary Measurement Partitives",
+                "question": "To prepare the festive family breakfast, Mother bought a ________ of warm freshly baked bread, a ________ of orange juice, and a ________ of pure olive oil.",
+                "options": [
+                    "loaf / carton / bottle",
+                    "slice / package / pinch",
+                    "carton / clove / can",
+                    "bag / loaf / cup"
+                ],
+                "correctAnswer": 0,
+                "explanation": "The appropriate partitive expressions are: \"a loaf of bread\", \"a carton of orange juice\", and \"a bottle of olive oil\". Option A is correct."
+            },
+            {
+                "id": "e22_q18",
+                "visualClue": "🪞 Reflexive Pronouns",
+                "question": "The third-grade intermediate students chopped the vegetables and prepared the traditional salad all by ________ during home economics class.",
+                "options": [
+                    "himself",
+                    "herself",
+                    "ourselves",
+                    "themselves"
+                ],
+                "correctAnswer": 3,
+                "explanation": "The subject \"the third-grade intermediate students\" is third-person plural (\"they\"), which requires the reflexive pronoun \"themselves\". Option D is correct."
+            },
+            {
+                "id": "e22_q19",
+                "visualClue": "🔗 Cause & Result Connectors",
+                "question": "We chose to dine at the traditional restaurant ________ their dishes are organic and fresh, ________ we thoroughly enjoyed every course.",
+                "options": [
+                    "so / because",
+                    "because / so",
+                    "but / because",
+                    "although / so"
+                ],
+                "correctAnswer": 1,
+                "explanation": "\"Because\" introduces the underlying reason for choosing the restaurant, and \"so\" introduces the logical consequence/result. Option B is correct."
+            },
+            {
+                "id": "e22_q20",
+                "visualClue": "🍲 Saudi Culinary Heritage",
+                "question": "Authentic Saudi Chicken Kabsa requires aromatic spices, basmati rice, onions, and fresh tomatoes as its primary ________.",
+                "options": [
+                    "departures",
+                    "terminals",
+                    "donations",
+                    "ingredients"
+                ],
+                "correctAnswer": 3,
+                "explanation": "The items or food elements combined together to create a culinary dish or recipe are called \"ingredients\". Option D is correct."
+            }
+        ]
     }
   ],
   "readingGlossary": {

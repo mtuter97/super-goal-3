@@ -2444,6 +2444,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const curExamFilter = state.examFilter || 'all';
     const examsToRender = DATA.exams.filter(ex => {
+      if (curExamFilter === 'term1') return ex.unit === '1-4' || ex.id === 'exam_22';
       if (curExamFilter === 'tri') return ex.unit === '1-3' || ex.id === 'exam_21';
       if (curExamFilter === 'u1') return ex.unit === 1;
       if (curExamFilter === 'u2') return ex.unit === 2;

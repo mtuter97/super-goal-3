@@ -3,8 +3,8 @@
 > **Course:** Super Goal 3 (Intermediate Third Grade – Term 1)  
 > **Authority:** Saudi Ministry of Education Curriculum Standards (McGraw-Hill)  
 > **Supervising Instructor:** Teacher Mahmoud Al-Saeed  
-> **Version:** 4.3 (Tri-Unit Milestone Benchmark Championship & Comprehensive Unit 3 Pedagogical Preparation)  
-> **Last Updated:** November 2026 (Phase 4.3: Tri-Unit Milestone Exam 21 covering Units 1, 2 & 3 with 20 Diagnostic Questions + Lesson Preparation Architecture)
+> **Version:** 4.4 (Grand Term 1 Final Comprehensive Milestone Championship & Complete Units 1–4 Pedagogical Synthesis)  
+> **Last Updated:** November 2026 (Phase 4.4: Term 1 Grand Milestone Exam 22 covering Units 1 to 4 with 20 Diagnostic Questions + Unit 4 Lesson Preparation Architecture)
 
 ---
 
@@ -72,7 +72,7 @@ When extending or maintaining this project in any session, adhere strictly to th
 | **High-Resolution Images** | 40+ authentic textbook images in `assets/images` | ✅ Extracted from SG3 book and cultural archives |
 | **Writing Master Tasks** | 4 comprehensive studio tasks | ✅ Youth habits + Biography + Travel Itinerary + Culinary Recipe with live word counters & keyword evaluators |
 | **Discussion Scenarios** | 12 communicative role-plays | ✅ Gym, smartphone, diet, used to, blood drive, Falcons, airport, study tour, concierge, grocery store, Kabsa home cooking, healthy dining |
-| **Tiered Examinations** | 21 exams (20 single-unit + 1 Tri-Unit Milestone Benchmark Exam = 420 questions) | ✅ 420 questions with visual clues & comprehensive explanations |
+| **Tiered Examinations** | 22 exams (20 single-unit + 1 Tri-Unit Milestone + 1 Grand Term 1 Final Milestone = 440 questions) | ✅ 440 questions with visual clues & comprehensive explanations |
 | **Arabic Characters in Web Code** | **0** | ✅ Verified 100% Target Language Immersion |
 
 ---
@@ -200,6 +200,7 @@ c:\Users\elsae\Desktop\grade 3 super goal\
   - Scenario 11: Preparing Traditional Saudi Kabsa at Home (Omar & Tariq).
   - Scenario 12: Restaurant Dining & Nutritional Awareness (Nawaf, Faisal & Waiter Anas).
 - **Exams 16 to 20:** 100 multiple-choice questions with visual clues and detailed pedagogical explanations.
+- **Grand Term 1 Milestone Benchmark Exam (Exam 22):** Comprehensive 20-question final term milestone championship synthesizing all four units of Term 1 (Lifestyles, Life Stories, When Are You Traveling?, and What Do I Need to Buy?). Evaluates frequency adverbs, past inflections, habitual 'used to', future forms, purpose infinitives, count/non-count nouns, partitives, reflexives, cause/result connectors, and authentic Saudi cultural heritage. Accessible via the dedicated `Term 1 Grand Milestone (Exam 22)` filter.
 
 ---
 
